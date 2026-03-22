@@ -4,7 +4,13 @@ import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import { routing } from "@/i18n/routing";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const { data: packs } = await packRepository.getAllPacks();
+  let packs: Awaited<ReturnType<typeof packRepository.getAllPacks>>["data"] = [];
+  try {
+    const result = await packRepository.getAllPacks();
+    packs = result.data;
+  } catch {
+    // API unavailable during build - sitemap will only contain static pages
+  }
   const locales = routing.locales;
 
   const staticPages = [

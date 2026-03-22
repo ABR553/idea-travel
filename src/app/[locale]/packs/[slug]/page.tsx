@@ -16,10 +16,14 @@ interface PackPageProps {
 }
 
 export async function generateStaticParams() {
-  const { data: packs } = await packRepository.getAllPacks();
-  return routing.locales.flatMap((locale) =>
-    packs.map((pack) => ({ locale, slug: pack.slug }))
-  );
+  try {
+    const { data: packs } = await packRepository.getAllPacks();
+    return routing.locales.flatMap((locale) =>
+      packs.map((pack) => ({ locale, slug: pack.slug }))
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PackPageProps): Promise<Metadata> {

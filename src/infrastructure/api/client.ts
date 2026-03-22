@@ -1,10 +1,4 @@
-const API_URL_FALLBACK = "http://localhost:8100";
-
-// Bracket notation prevents Next.js webpack DefinePlugin from inlining
-// the value at build time, ensuring it reads the real env var at runtime
-function getApiBaseUrl(): string {
-  return process.env['API_URL'] || API_URL_FALLBACK;
-}
+const API_BASE_URL = process.env.API_URL ?? "http://localhost:8100";
 
 interface FetchOptions {
   locale?: string;
@@ -28,7 +22,7 @@ export class ApiError extends Error {
 }
 
 function buildUrl(path: string, params?: Record<string, string | number | boolean | undefined>): string {
-  const url = new URL(path, getApiBaseUrl());
+  const url = new URL(path, API_BASE_URL);
   if (params) {
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined) {
@@ -49,7 +43,7 @@ export async function apiFetch<T>(path: string, options: FetchOptions = {}): Pro
 
   const url = buildUrl(`/api/v1${path}`, queryParams);
 
-  console.log(`[API] Fetching: ${url} (API_URL=${getApiBaseUrl()})`);
+  console.log(`[API] Fetching: ${url} (API_URL=${API_BASE_URL})`);
 
   const fetchOptions: RequestInit = revalidate === false
     ? { cache: "no-store" }

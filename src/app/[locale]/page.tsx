@@ -9,6 +9,8 @@ import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import { productRepository } from "@/infrastructure/repositories/product.repository";
 import { generateWebsiteJsonLd } from "@/lib/seo";
 
+export const revalidate = 60;
+
 interface HomePageProps {
   params: Promise<{ locale: string }>;
 }
@@ -49,11 +51,12 @@ export default async function HomePage({ params }: HomePageProps) {
   let featuredPacks: Awaited<ReturnType<typeof packRepository.getFeaturedPacks>> = [];
   let popularProducts: Awaited<ReturnType<typeof productRepository.getAllProducts>>["data"] = [];
   try {
-    const [packs, productsResponse] = await Promise.all([
-      packRepository.getFeaturedPacks(locale),
-      productRepository.getAllProducts(locale, 1, 4),
-    ]);
-    featuredPacks = packs;
+    featuredPacks = await packRepository.getFeaturedPacks(locale);
+  } catch {
+    // API unavailable during build
+  }
+  try {
+    const productsResponse = await productRepository.getAllProducts(locale, 1, 4);
     popularProducts = productsResponse.data;
   } catch {
     // API unavailable during build

@@ -89,7 +89,15 @@ export default async function PacksPage({ params, searchParams }: PacksPageProps
   const selectedSearch = search ?? "";
 
   const apiFilters = buildApiFilters(selectedDays, selectedDestinations, selectedPrice, selectedSort, selectedSearch);
-  const { data: packs, total } = await packRepository.getAllPacks(locale, 1, 50, apiFilters);
+  let packs: Awaited<ReturnType<typeof packRepository.getAllPacks>>["data"] = [];
+  let total = 0;
+  try {
+    const result = await packRepository.getAllPacks(locale, 1, 50, apiFilters);
+    packs = result.data;
+    total = result.total;
+  } catch {
+    // API unavailable during build
+  }
 
   const hasActiveFilters =
     selectedDays !== "all" ||

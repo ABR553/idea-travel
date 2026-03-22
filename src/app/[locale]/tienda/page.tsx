@@ -42,12 +42,16 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
   const validCategories = ["luggage", "electronics", "accessories", "comfort", "photography"];
   const selectedCategory = category && validCategories.includes(category) ? category : "all";
 
-  const productsResponse =
-    selectedCategory === "all"
-      ? await productRepository.getAllProducts(locale)
-      : await productRepository.getProductsByCategory(selectedCategory as ProductCategory, locale);
-
-  const filteredProducts = productsResponse.data;
+  let filteredProducts: Awaited<ReturnType<typeof productRepository.getAllProducts>>["data"] = [];
+  try {
+    const productsResponse =
+      selectedCategory === "all"
+        ? await productRepository.getAllProducts(locale)
+        : await productRepository.getProductsByCategory(selectedCategory as ProductCategory, locale);
+    filteredProducts = productsResponse.data;
+  } catch {
+    // API unavailable during build
+  }
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 py-8 lg:py-12">

@@ -43,15 +43,25 @@ export async function apiFetch<T>(path: string, options: FetchOptions = {}): Pro
 
   const url = buildUrl(`/api/v1${path}`, queryParams);
 
+  console.log(`[API] Fetching: ${url} (API_URL=${API_BASE_URL})`);
+
   const fetchOptions: RequestInit = revalidate === false
     ? { cache: "no-store" }
     : { next: { revalidate } };
 
-  const res = await fetch(url, fetchOptions);
+  try {
+    const res = await fetch(url, fetchOptions);
 
-  if (!res.ok) {
-    throw new ApiError(res.status, res.statusText, url);
+    if (!res.ok) {
+      console.error(`[API] Error ${res.status} ${res.statusText}: ${url}`);
+      throw new ApiError(res.status, res.statusText, url);
+    }
+
+    const data = await res.json() as T;
+    console.log(`[API] Success: ${url}`, JSON.stringify(data).slice(0, 500));
+    return data;
+  } catch (error) {
+    console.error(`[API] Fetch failed: ${url}`, error instanceof Error ? error.message : error);
+    throw error;
   }
-
-  return res.json() as Promise<T>;
 }

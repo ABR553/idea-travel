@@ -46,12 +46,18 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const t = await getTranslations("home");
 
-  const [featuredPacks, productsResponse] = await Promise.all([
-    packRepository.getFeaturedPacks(locale),
-    productRepository.getAllProducts(locale, 1, 4),
-  ]);
-
-  const popularProducts = productsResponse.data;
+  let featuredPacks: Awaited<ReturnType<typeof packRepository.getFeaturedPacks>> = [];
+  let popularProducts: Awaited<ReturnType<typeof productRepository.getAllProducts>>["data"] = [];
+  try {
+    const [packs, productsResponse] = await Promise.all([
+      packRepository.getFeaturedPacks(locale),
+      productRepository.getAllProducts(locale, 1, 4),
+    ]);
+    featuredPacks = packs;
+    popularProducts = productsResponse.data;
+  } catch {
+    // API unavailable during build
+  }
   const jsonLd = generateWebsiteJsonLd();
 
   return (

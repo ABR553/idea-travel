@@ -41,7 +41,7 @@ export class PackRepository implements IPackService {
 
   async getPackBySlug(slug: string, locale: string = "es"): Promise<PackDetail | null> {
     try {
-      const response = await apiFetch<ApiPackResponse>(`/packs/${slug}`, { locale, revalidate: false });
+      const response = await apiFetch<ApiPackResponse>(`/packs/${slug}`, { locale, revalidate: 3600 });
       return mapPackDetail(response);
     } catch (error) {
       if (error instanceof ApiError && error.isNotFound) {

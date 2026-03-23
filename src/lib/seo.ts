@@ -1,5 +1,6 @@
 import type { PackDetail } from "@/domain/models/pack.types";
 import type { Product } from "@/domain/models/product.types";
+import type { BlogPostListItem, BlogPost } from "@/domain/models/blog.types";
 import { SITE_NAME, SITE_URL } from "./constants";
 
 interface BreadcrumbItem {
@@ -72,6 +73,45 @@ export function generateProductJsonLd(product: Product) {
       "@type": "AggregateRating",
       ratingValue: product.rating,
       bestRating: 5,
+    },
+  };
+}
+
+export function generateBlogListJsonLd(posts: BlogPostListItem[], locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${SITE_NAME} Blog`,
+    url: `${SITE_URL}/${locale}/blog`,
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      image: post.coverImage,
+      url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+    })),
+  };
+}
+
+export function generateBlogPostJsonLd(post: BlogPost, locale: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage,
+    url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+    datePublished: post.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   };
 }

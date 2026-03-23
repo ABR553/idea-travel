@@ -10,6 +10,7 @@ import type { Locale } from "@/i18n/routing";
 const NAV_LINKS = [
   { href: "/packs" as const, key: "packs" },
   { href: "/tienda" as const, key: "shop" },
+  { href: "/blog" as const, key: "blog" },
 ];
 
 export function Header() {

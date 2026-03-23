@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { packRepository } from "@/infrastructure/repositories/pack.repository";
+import { blogRepository } from "@/infrastructure/repositories/blog.repository";
 import { routing } from "@/i18n/routing";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -9,7 +10,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const result = await packRepository.getAllPacks();
     packs = result.data;
   } catch {
-    // API unavailable during build - sitemap will only contain static pages
+    // API unavailable during build
+  }
+
+  let blogPosts: Awaited<ReturnType<typeof blogRepository.getPosts>>["data"] = [];
+  try {
+    const result = await blogRepository.getPosts("es", 1, 100);
+    blogPosts = result.data;
+  } catch {
+    // API unavailable during build
   }
   const locales = routing.locales;
 
@@ -17,6 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "", priority: 1, changeFrequency: "daily" as const },
     { path: "/packs", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/tienda", priority: 0.7, changeFrequency: "weekly" as const },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/sobre-nosotros", priority: 0.3, changeFrequency: "monthly" as const },
   ];
 
@@ -63,6 +73,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [l, `${SITE_URL}/${l}/packs/${pack.slug}`])
+          ),
+        },
+      });
+    }
+  }
+
+  for (const post of blogPosts) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+        lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${SITE_URL}/${l}/blog/${post.slug}`])
           ),
         },
       });

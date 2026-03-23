@@ -11,6 +11,7 @@
     "packs": "Travel Packs",
     "flights": "Flights",
     "shop": "Shop",
+    "blog": "Blog",
     "explorePacks": "Explore Packs",
     "openMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu"
@@ -179,5 +180,18 @@
     "learnMore": "Cookie policy",
     "acceptAll": "Accept all",
     "rejectNonEssential": "Essential only"
+  },
+  "blog": {
+    "title": "Travel Blog",
+    "metaTitle": "Travel Blog | IdeaTravel",
+    "metaDescription": "Guides, tips and budgets for your travels. Practical articles to plan your next adventure.",
+    "description": "Practical guides, tips and real budgets to make planning your trip as easy as enjoying it.",
+    "readMore": "Read more",
+    "noPosts": "No articles published yet.",
+    "category_guia": "Guide",
+    "category_presupuesto": "Budget",
+    "category_epoca": "Best time",
+    "category_consejos": "Tips",
+    "category_lista": "List"
   }
 }

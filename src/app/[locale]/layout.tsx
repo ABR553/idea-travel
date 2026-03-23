@@ -7,6 +7,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
+import { GoogleAnalytics } from "@/components/atoms/GoogleAnalytics";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
@@ -76,6 +77,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           </main>
           <Footer />
           <CookieBanner />
+          <GoogleAnalytics />
         </NextIntlClientProvider>
       </body>
     </html>

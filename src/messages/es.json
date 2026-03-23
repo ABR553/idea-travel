@@ -156,5 +156,13 @@
     "budget": "Economico",
     "standard": "Estandar",
     "premium": "Premium"
+  },
+  "cookieBanner": {
+    "ariaLabel": "Banner de consentimiento de cookies",
+    "title": "Utilizamos cookies",
+    "description": "Usamos cookies esenciales para que el sitio funcione y cookies opcionales de analisis para mejorar tu experiencia.",
+    "learnMore": "Politica de cookies",
+    "acceptAll": "Aceptar todas",
+    "rejectNonEssential": "Solo esenciales"
   }
 }

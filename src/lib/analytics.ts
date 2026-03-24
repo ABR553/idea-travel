@@ -18,7 +18,7 @@ function hasAnalyticsConsent(): boolean {
 
 function getGtag(): ((...args: unknown[]) => void) | null {
   if (typeof window === "undefined") return null;
-  return (window as Record<string, unknown>).gtag as ((...args: unknown[]) => void) | null ?? null;
+  return (window as unknown as Record<string, unknown>).gtag as ((...args: unknown[]) => void) | null ?? null;
 }
 
 export type AffiliateProvider = "amazon" | "booking" | "civitatis" | "getyourguide" | "iati" | "discovercars" | "travelpayouts";

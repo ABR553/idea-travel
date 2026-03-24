@@ -18,5 +18,20 @@ export const routing = defineRouting({
       es: "/tienda",
       en: "/shop",
     },
+    "/sobre-nosotros": {
+      es: "/sobre-nosotros",
+      en: "/about-us",
+    },
+    "/blog": "/blog",
+    "/blog/[slug]": "/blog/[slug]",
+    "/privacidad": {
+      es: "/privacidad",
+      en: "/privacy",
+    },
+    "/terminos": {
+      es: "/terminos",
+      en: "/terms",
+    },
+    "/cookies": "/cookies",
   },
 });

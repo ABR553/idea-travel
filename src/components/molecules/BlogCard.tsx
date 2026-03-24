@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -13,7 +15,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
   return (
     <article className="group relative bg-white dark:bg-neutral-800 rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-md)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-in-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1">
-      <Link href={`/blog/${post.slug}`} className="block" aria-label={post.title}>
+      <Link href={{ pathname: "/blog/[slug]", params: { slug: post.slug } }} className="block" aria-label={post.title}>
         <div className="relative aspect-[16/9] overflow-hidden">
           <Image
             src={post.coverImage}

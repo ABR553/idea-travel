@@ -544,8 +544,8 @@ function markdownToHtml(md: string): string {
     const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
     if (headingMatch) {
       if (inList) { htmlParts.push(`</${listType}>`); inList = false; }
-      const level = headingMatch[1].length;
-      htmlParts.push(`<h${level}>${processInline(headingMatch[2])}</h${level}>`);
+      const level = headingMatch[1]!.length;
+      htmlParts.push(`<h${level}>${processInline(headingMatch[2]!)}</h${level}>`);
       continue;
     }
 
@@ -570,7 +570,7 @@ function markdownToHtml(md: string): string {
         inList = true;
         listType = "ol";
       }
-      htmlParts.push(`<li>${processInline(olMatch[2])}</li>`);
+      htmlParts.push(`<li>${processInline(olMatch[2]!)}</li>`);
       continue;
     }
 

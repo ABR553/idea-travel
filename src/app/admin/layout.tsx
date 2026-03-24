@@ -72,6 +72,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <a href="/admin/blog" className="text-sm text-neutral-600 hover:text-blue-600 transition-colors">
               Blog
             </a>
+            <a href="/admin/ai-generator" className="text-sm text-neutral-600 hover:text-blue-600 transition-colors">
+              AI Generator
+            </a>
           </div>
           <div className="flex items-center gap-4">
             <a href="/" className="text-sm text-neutral-500 hover:text-neutral-700">

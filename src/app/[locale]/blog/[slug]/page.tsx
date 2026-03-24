@@ -43,8 +43,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const jsonLd = generateBlogPostJsonLd(post, locale);
   const breadcrumbs = [
-    { label: t("title"), href: "/blog" },
-    { label: post.title },
+    { name: t("title"), url: "/blog" },
+    { name: post.title, url: `/blog/${slug}` },
   ];
 
   return (

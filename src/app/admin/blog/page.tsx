@@ -529,7 +529,7 @@ function markdownToHtml(md: string): string {
   let listType: "ul" | "ol" = "ul";
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+    const line = lines[i]!;
     const trimmed = line.trim();
 
     if (!trimmed) {

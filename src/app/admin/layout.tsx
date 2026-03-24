@@ -1,12 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-
-const AdminSecretContext = createContext<string>("");
-
-export function useAdminSecret() {
-  return useContext(AdminSecretContext);
-}
+import { useState, useEffect, type ReactNode } from "react";
+import { AdminSecretContext } from "./admin-context";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const [secret, setSecret] = useState("");

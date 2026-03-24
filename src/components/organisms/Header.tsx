@@ -51,8 +51,8 @@ export function Header() {
         }`}
       >
         <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-neutral-900 dark:text-white font-[family-name:var(--font-heading)]">
-            Idea<span className="text-primary-500">Travel</span>
+          <Link href="/" className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white font-[family-name:var(--font-heading)] whitespace-nowrap">
+            Tengo Un <span className="text-primary-500">Viaje</span>
           </Link>
           <ul className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (

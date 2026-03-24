@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteName": "IdeaTravel",
+    "siteName": "Tengo Un Viaje",
     "siteDescription": "Discover the best travel packs, find flights and gear up for your next adventure with our recommendations.",
     "affiliateDisclosure": "This site participates in affiliate programs from Amazon, GetYourGuide and Civitatis. By clicking affiliate links and making a purchase, we may receive a commission at no additional cost to you.",
     "moreInfo": "More info",
@@ -89,7 +89,7 @@
   },
   "flights": {
     "title": "Search Flights",
-    "metaTitle": "Search Flights | IdeaTravel",
+    "metaTitle": "Search Flights | Tengo Un Viaje",
     "metaDescription": "Find the best flights for your next trip. Compare prices, choose your class and book at the best price.",
     "heading": "Find your ideal flight",
     "description": "Enter your travel details and we'll help you find the best flight options.",
@@ -125,7 +125,7 @@
   },
   "shop": {
     "title": "Travel Shop",
-    "metaTitle": "Travel Shop | IdeaTravel",
+    "metaTitle": "Travel Shop | Tengo Un Viaje",
     "metaDescription": "Essential products for your trip: luggage, electronics, accessories and more. Real recommendations with links to Amazon.",
     "description": "Our recommended products to make your trip a comfortable, safe and memorable experience.",
     "all": "All",
@@ -149,18 +149,18 @@
     "rights": "All rights reserved."
   },
   "about": {
-    "metaTitle": "About Us | IdeaTravel",
-    "metaDescription": "Learn about IdeaTravel: your travel platform with curated packs, flights and gear. Transparency about our affiliate links.",
-    "title": "About IdeaTravel",
+    "metaTitle": "About Us | Tengo Un Viaje",
+    "metaDescription": "Learn about Tengo Un Viaje: your travel platform with curated packs, flights and gear. Transparency about our affiliate links.",
+    "title": "About Tengo Un Viaje",
     "subtitle": "We believe planning a trip should be as exciting as the trip itself.",
     "missionTitle": "Our mission",
-    "missionText": "IdeaTravel was born from a simple idea: to gather everything you need to plan your next adventure in one place. From travel packs with day-by-day routes, verified accommodations and local experiences, to a flight search engine and the essential products for your luggage.",
+    "missionText": "Tengo Un Viaje was born from a simple idea: to gather everything you need to plan your next adventure in one place. From travel packs with day-by-day routes, verified accommodations and local experiences, to a flight search engine and the essential products for your luggage.",
     "howItWorksTitle": "How it works",
     "howItWorksText": "We research, test and select the best options for each destination. Each pack includes a complete route with accommodations for different budgets and the experiences that are truly worth living. We are not an agency: we give you the information and you decide how, when and with whom to travel.",
     "affiliateTitle": "Transparency: affiliate links",
     "affiliateText": "This website contains affiliate links to services such as Amazon, Booking, GetYourGuide and Civitatis, among others. If you book or purchase through our links, we receive a small commission at no additional cost to you. This is what allows us to keep the website running and continue creating quality content. We only recommend products and services that we consider useful and trustworthy.",
     "contactTitle": "Contact",
-    "contactText": "If you have any questions, suggestions or collaboration proposals, you can write to us at hola@ideatravel.com. We'd love to hear from you."
+    "contactText": "If you have any questions, suggestions or collaboration proposals, you can write to us at hola@tengounviaje.com. We'd love to hear from you."
   },
   "notFound": {
     "code": "404",
@@ -183,7 +183,7 @@
   },
   "blog": {
     "title": "Travel Blog",
-    "metaTitle": "Travel Blog | IdeaTravel",
+    "metaTitle": "Travel Blog | Tengo Un Viaje",
     "metaDescription": "Guides, tips and budgets for your travels. Practical articles to plan your next adventure.",
     "description": "Practical guides, tips and real budgets to make planning your trip as easy as enjoying it.",
     "readMore": "Read more",

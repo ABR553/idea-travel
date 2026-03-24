@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PackPageProps): Promise<Metad
     title: pack.title,
     description: pack.shortDescription,
     openGraph: {
-      title: `${pack.title} | IdeaTravel`,
+      title: `${pack.title} | Tengo Un Viaje`,
       description: pack.shortDescription,
       images: [{ url: pack.coverImage, width: 1200, height: 630, alt: pack.title }],
       locale: locale === "en" ? "en_US" : "es_ES",

@@ -11,8 +11,8 @@ export function Footer() {
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <span className="text-xl font-bold text-white font-[family-name:var(--font-heading)]">
-              Idea<span className="text-primary-500">Travel</span>
+            <span className="text-lg md:text-xl font-bold text-white font-[family-name:var(--font-heading)] whitespace-nowrap">
+              Tengo Un <span className="text-primary-500">Viaje</span>
             </span>
             <p className="mt-4 text-sm">
               {t("description")}
@@ -60,7 +60,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-neutral-800 pt-8 text-center text-xs">
-          &copy; {new Date().getFullYear()} IdeaTravel. {t("rights")}
+          &copy; {new Date().getFullYear()} Tengo Un Viaje. {t("rights")}
         </div>
       </div>
     </footer>

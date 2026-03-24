@@ -1,4 +1,4 @@
-# Design System - Idea Travel
+# Design System - Tengo Un Viaje
 
 ## Filosofia de Diseno
 
@@ -645,7 +645,7 @@ Sistema basado en 4px:
       </div>
     </div>
     <div class="border-t border-neutral-800 pt-8 text-center text-caption">
-      © 2026 IdeaTravel. Todos los derechos reservados.
+      © 2026 Tengo Un Viaje. Todos los derechos reservados.
     </div>
   </div>
 </footer>

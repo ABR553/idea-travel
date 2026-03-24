@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PacksPageProps): Promise<Meta
     title: t("title"),
     description: t("metaDescription"),
     openGraph: {
-      title: `${t("title")} | IdeaTravel`,
+      title: `${t("title")} | Tengo Un Viaje`,
       description: t("metaDescription"),
     },
     alternates: {

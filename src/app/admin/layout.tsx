@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <html lang="es">
         <body className="bg-neutral-100 min-h-screen flex items-center justify-center">
           <form onSubmit={handleLogin} className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-            <h1 className="text-xl font-bold mb-4">Admin - IdeaTravel</h1>
+            <h1 className="text-xl font-bold mb-4">Admin - Tengo Un Viaje</h1>
             <label htmlFor="admin-secret" className="block text-sm font-medium text-neutral-700 mb-1">
               Admin Secret
             </label>
@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <nav className="bg-white border-b border-neutral-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="text-lg font-bold">
-              Idea<span className="text-blue-600">Travel</span> Admin
+              Tengo Un <span className="text-blue-600">Viaje</span> Admin
             </span>
             <a href="/admin/blog" className="text-sm text-neutral-600 hover:text-blue-600 transition-colors">
               Blog

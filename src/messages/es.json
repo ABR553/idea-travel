@@ -1,6 +1,6 @@
 {
   "common": {
-    "siteName": "IdeaTravel",
+    "siteName": "Tengo Un Viaje",
     "siteDescription": "Descubre los mejores packs de viaje, encuentra vuelos y equipate para tu proxima aventura con nuestras recomendaciones.",
     "affiliateDisclosure": "Este sitio participa en programas de afiliados de Amazon, GetYourGuide y Civitatis. Al hacer clic en enlaces de afiliados y realizar una compra, podemos recibir una comision sin coste adicional para ti.",
     "moreInfo": "Mas info",
@@ -89,7 +89,7 @@
   },
   "flights": {
     "title": "Buscar Vuelos",
-    "metaTitle": "Buscar Vuelos | IdeaTravel",
+    "metaTitle": "Buscar Vuelos | Tengo Un Viaje",
     "metaDescription": "Encuentra los mejores vuelos para tu proximo viaje. Compara precios, elige tu clase y reserva al mejor precio.",
     "heading": "Encuentra tu vuelo ideal",
     "description": "Introduce los datos de tu viaje y te ayudamos a encontrar las mejores opciones de vuelo.",
@@ -125,7 +125,7 @@
   },
   "shop": {
     "title": "Tienda de Viaje",
-    "metaTitle": "Tienda de Viaje | IdeaTravel",
+    "metaTitle": "Tienda de Viaje | Tengo Un Viaje",
     "metaDescription": "Los productos imprescindibles para tu viaje: maletas, electronica, accesorios y mas. Recomendaciones reales con enlaces a Amazon.",
     "description": "Nuestros productos recomendados para hacer de tu viaje una experiencia comoda, segura y memorable.",
     "all": "Todos",
@@ -149,18 +149,18 @@
     "rights": "Todos los derechos reservados."
   },
   "about": {
-    "metaTitle": "Sobre Nosotros | IdeaTravel",
-    "metaDescription": "Conoce IdeaTravel: tu plataforma de viajes con packs curados, vuelos y equipamiento. Transparencia sobre nuestros enlaces de afiliado.",
-    "title": "Sobre IdeaTravel",
+    "metaTitle": "Sobre Nosotros | Tengo Un Viaje",
+    "metaDescription": "Conoce Tengo Un Viaje: tu plataforma de viajes con packs curados, vuelos y equipamiento. Transparencia sobre nuestros enlaces de afiliado.",
+    "title": "Sobre Tengo Un Viaje",
     "subtitle": "Creemos que planificar un viaje deberia ser tan emocionante como el viaje en si.",
     "missionTitle": "Nuestra mision",
-    "missionText": "IdeaTravel nacio con una idea sencilla: reunir en un solo lugar todo lo que necesitas para planificar tu proxima aventura. Desde packs de viaje con rutas dia a dia, alojamientos verificados y experiencias locales, hasta un buscador de vuelos y los productos imprescindibles para tu equipaje.",
+    "missionText": "Tengo Un Viaje nacio con una idea sencilla: reunir en un solo lugar todo lo que necesitas para planificar tu proxima aventura. Desde packs de viaje con rutas dia a dia, alojamientos verificados y experiencias locales, hasta un buscador de vuelos y los productos imprescindibles para tu equipaje.",
     "howItWorksTitle": "Como funciona",
     "howItWorksText": "Investigamos, probamos y seleccionamos las mejores opciones para cada destino. Cada pack incluye una ruta completa con alojamientos para distintos presupuestos y las experiencias que realmente merece la pena vivir. No somos una agencia: te damos la informacion y tu decides como, cuando y con quien viajar.",
     "affiliateTitle": "Transparencia: enlaces de afiliado",
     "affiliateText": "Esta web contiene enlaces de afiliado a servicios como Amazon, Booking, GetYourGuide y Civitatis, entre otros. Si reservas o compras a traves de nuestros enlaces, recibimos una pequena comision sin ningun coste adicional para ti. Esto es lo que nos permite mantener la web activa y seguir creando contenido de calidad. Solo recomendamos productos y servicios que consideramos utiles y de confianza.",
     "contactTitle": "Contacto",
-    "contactText": "Si tienes alguna pregunta, sugerencia o propuesta de colaboracion, puedes escribirnos a hola@ideatravel.com. Estaremos encantados de escucharte."
+    "contactText": "Si tienes alguna pregunta, sugerencia o propuesta de colaboracion, puedes escribirnos a hola@tengounviaje.com. Estaremos encantados de escucharte."
   },
   "notFound": {
     "code": "404",
@@ -183,7 +183,7 @@
   },
   "blog": {
     "title": "Blog de Viajes",
-    "metaTitle": "Blog de Viajes | IdeaTravel",
+    "metaTitle": "Blog de Viajes | Tengo Un Viaje",
     "metaDescription": "Guias, consejos y presupuestos para tus viajes. Articulos practicos para planificar tu proxima aventura.",
     "description": "Guias practicas, consejos y presupuestos reales para que planificar tu viaje sea tan facil como disfrutarlo.",
     "readMore": "Leer mas",

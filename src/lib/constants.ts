@@ -1,7 +1,7 @@
-export const SITE_NAME = "IdeaTravel";
+export const SITE_NAME = "Tengo Un Viaje";
 export const SITE_DESCRIPTION =
   "Descubre los mejores packs de viaje, encuentra vuelos y equipate para tu proxima aventura con nuestras recomendaciones.";
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ideatravel.com";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tengounviaje.com";
 
 export const DEFAULT_OG_IMAGE = "/og-default.jpg";
 

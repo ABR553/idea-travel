@@ -43,6 +43,7 @@ export function GoogleAnalytics() {
           gtag('consent', 'default', {
             analytics_storage: 'denied',
           });
+          gtag('config', '${GA_ID}');
         `}
       </Script>
     </>

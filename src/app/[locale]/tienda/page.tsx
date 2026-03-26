@@ -4,6 +4,7 @@ import { ProductGrid } from "@/components/organisms/ProductGrid";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { CategoryFilter } from "@/components/organisms/CategoryFilter";
 import { productRepository } from "@/infrastructure/repositories/product.repository";
+import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
 import type { ProductCategory } from "@/domain/models/product.types";
 
 interface TiendaPageProps {
@@ -70,9 +71,15 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
         </p>
       </div>
 
+      <AffiliateDisclosure variant="banner" />
+
       <CategoryFilter selected={selectedCategory} />
 
       <ProductGrid products={filteredProducts} />
+
+      <p className="mt-8 text-xs text-neutral-400 dark:text-neutral-500">
+        {t("priceDisclaimer")}
+      </p>
     </div>
   );
 }

@@ -2,7 +2,7 @@
   "common": {
     "siteName": "Tengo Un Viaje",
     "siteDescription": "Descubre los mejores packs de viaje, encuentra vuelos y equipate para tu proxima aventura con nuestras recomendaciones.",
-    "affiliateDisclosure": "Este sitio participa en programas de afiliados de Amazon, GetYourGuide y Civitatis. Al hacer clic en enlaces de afiliados y realizar una compra, podemos recibir una comision sin coste adicional para ti.",
+    "affiliateDisclosure": "Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Este sitio tambien participa en programas de afiliados de GetYourGuide y Civitatis. Al hacer clic en enlaces de afiliados y realizar una compra, podemos recibir una comision sin coste adicional para ti.",
     "moreInfo": "Mas info",
     "skipToContent": "Saltar al contenido principal",
     "breadcrumbHome": "Inicio"
@@ -135,7 +135,8 @@
     "comfort": "Confort",
     "photography": "Fotografia",
     "viewOnAmazon": "Ver en Amazon",
-    "buyOnAmazon": "Comprar en Amazon"
+    "buyOnAmazon": "Comprar en Amazon",
+    "priceDisclaimer": "Los precios y la disponibilidad son orientativos y pueden variar. El precio final se muestra en Amazon al momento de la compra."
   },
   "footer": {
     "description": "Tu plataforma de viajes con los mejores packs, vuelos y equipamiento para tu proxima aventura.",

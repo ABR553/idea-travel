@@ -6,4 +6,4 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tengounviaj
 export const DEFAULT_OG_IMAGE = "/og-default.jpg";
 
 export const AFFILIATE_DISCLOSURE =
-  "Este sitio participa en programas de afiliados de Amazon, GetYourGuide y Civitatis. Al hacer clic en enlaces de afiliados y realizar una compra, podemos recibir una comision sin coste adicional para ti.";
+  "Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Este sitio tambien participa en programas de afiliados de GetYourGuide y Civitatis. Al hacer clic en enlaces de afiliados y realizar una compra, podemos recibir una comision sin coste adicional para ti.";

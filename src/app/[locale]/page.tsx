@@ -7,6 +7,7 @@ import { ProductGrid } from "@/components/organisms/ProductGrid";
 import { Button } from "@/components/atoms/Button";
 import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import { productRepository } from "@/infrastructure/repositories/product.repository";
+import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
 import { generateWebsiteJsonLd } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -124,6 +125,9 @@ export default async function HomePage({ params }: HomePageProps) {
               {t("viewAllShop")}
             </Button>
           </Link>
+        </div>
+        <div className="mt-8">
+          <AffiliateDisclosure variant="inline" />
         </div>
       </section>
     </>

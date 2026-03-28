@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { CategoryFilter } from "@/components/organisms/CategoryFilter";
 import { productRepository } from "@/infrastructure/repositories/product.repository";
 import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
+import { AmazonPrimeBanner } from "@/components/molecules/AmazonPrimeBanner";
 import type { ProductCategory } from "@/domain/models/product.types";
 
 interface TiendaPageProps {
@@ -74,6 +75,8 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
       <AffiliateDisclosure variant="banner" />
 
       <CategoryFilter selected={selectedCategory} />
+
+      <AmazonPrimeBanner />
 
       <ProductGrid products={filteredProducts} />
 

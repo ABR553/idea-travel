@@ -136,7 +136,11 @@
     "photography": "Photography",
     "viewOnAmazon": "View on Amazon",
     "buyOnAmazon": "Buy on Amazon",
-    "priceDisclaimer": "Prices and availability are approximate and subject to change. The final price is shown on Amazon at the time of purchase."
+    "priceDisclaimer": "Prices and availability are approximate and subject to change. The final price is shown on Amazon at the time of purchase.",
+    "primeBannerBadge": "Amazon Prime",
+    "primeBannerTitle": "Try Amazon Prime free for 30 days",
+    "primeBannerSubtitle": "Free 1-2 day delivery",
+    "primeBannerCta": "Try Prime free"
   },
   "footer": {
     "description": "Your travel platform with the best packs, flights and gear for your next adventure.",

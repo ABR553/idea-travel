@@ -136,7 +136,11 @@
     "photography": "Fotografia",
     "viewOnAmazon": "Ver en Amazon",
     "buyOnAmazon": "Comprar en Amazon",
-    "priceDisclaimer": "Los precios y la disponibilidad son orientativos y pueden variar. El precio final se muestra en Amazon al momento de la compra."
+    "priceDisclaimer": "Los precios y la disponibilidad son orientativos y pueden variar. El precio final se muestra en Amazon al momento de la compra.",
+    "primeBannerBadge": "Amazon Prime",
+    "primeBannerTitle": "Prueba Amazon Prime gratis 30 dias",
+    "primeBannerSubtitle": "Envio gratis en 1-2 dias",
+    "primeBannerCta": "Probar Prime gratis"
   },
   "footer": {
     "description": "Tu plataforma de viajes con los mejores packs, vuelos y equipamiento para tu proxima aventura.",

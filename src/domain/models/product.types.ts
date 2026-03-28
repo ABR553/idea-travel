@@ -16,6 +16,9 @@ export interface Product {
   affiliateUrl: string;
   image: string;
   rating: number;
+  externalId?: string | null;
+  projectId?: string | null;
+  link?: string | null;
 }
 
 export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {

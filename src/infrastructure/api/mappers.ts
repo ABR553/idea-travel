@@ -11,6 +11,7 @@ import type {
   RouteStep,
 } from "@/domain/models/pack.types";
 import type { Product } from "@/domain/models/product.types";
+import type { Project } from "@/domain/models/project.types";
 
 // --- API response types (snake_case) ---
 
@@ -106,6 +107,16 @@ export interface ApiProductResponse {
   affiliate_url: string;
   image: string;
   rating: number;
+  external_id?: string | null;
+  project_id?: string | null;
+  link?: string | null;
+}
+
+export interface ApiProjectResponse {
+  id: string;
+  slug: string;
+  name: string;
+  tag_id: string;
 }
 
 export interface ApiPaginatedResponse<T> {
@@ -241,6 +252,18 @@ export function mapProduct(api: ApiProductResponse): Product {
     affiliateUrl: api.affiliate_url,
     image: api.image,
     rating: api.rating,
+    externalId: api.external_id ?? null,
+    projectId: api.project_id ?? null,
+    link: api.link ?? null,
+  };
+}
+
+export function mapProject(api: ApiProjectResponse): Project {
+  return {
+    id: api.id,
+    slug: api.slug,
+    name: api.name,
+    tagId: api.tag_id,
   };
 }
 

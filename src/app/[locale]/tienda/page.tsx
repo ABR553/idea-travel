@@ -3,10 +3,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProductGrid } from "@/components/organisms/ProductGrid";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { CategoryFilter } from "@/components/organisms/CategoryFilter";
-import { productRepository } from "@/infrastructure/repositories/product.repository";
+import { projectRepository } from "@/infrastructure/repositories/project.repository";
 import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
 import { AmazonPrimeBanner } from "@/components/molecules/AmazonPrimeBanner";
-import type { ProductCategory } from "@/domain/models/product.types";
+import { CURRENT_PROJECT_SLUG } from "@/domain/models/project.types";
 
 interface TiendaPageProps {
   params: Promise<{ locale: string }>;
@@ -44,12 +44,15 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
   const validCategories = ["luggage", "electronics", "accessories", "comfort", "photography"];
   const selectedCategory = category && validCategories.includes(category) ? category : "all";
 
-  let filteredProducts: Awaited<ReturnType<typeof productRepository.getAllProducts>>["data"] = [];
+  let filteredProducts: Awaited<ReturnType<typeof projectRepository.getProjectProducts>>["data"] = [];
   try {
-    const productsResponse =
-      selectedCategory === "all"
-        ? await productRepository.getAllProducts(locale)
-        : await productRepository.getProductsByCategory(selectedCategory as ProductCategory, locale);
+    const productsResponse = await projectRepository.getProjectProducts(
+      CURRENT_PROJECT_SLUG,
+      locale,
+      1,
+      50,
+      selectedCategory !== "all" ? { category: selectedCategory } : undefined
+    );
     filteredProducts = productsResponse.data;
   } catch {
     // API unavailable during build

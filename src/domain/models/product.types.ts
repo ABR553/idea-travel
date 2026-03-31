@@ -15,6 +15,7 @@ export interface Product {
   currency: string;
   affiliateUrl: string;
   image: string;
+  images: string[];
   rating: number;
   externalId?: string | null;
   projectId?: string | null;

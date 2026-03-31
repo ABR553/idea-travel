@@ -106,6 +106,7 @@ export interface ApiProductResponse {
   currency: string;
   affiliate_url: string;
   image: string;
+  images?: string[];
   rating: number;
   external_id?: string | null;
   project_id?: string | null;
@@ -251,6 +252,7 @@ export function mapProduct(api: ApiProductResponse): Product {
     currency: api.currency,
     affiliateUrl: api.affiliate_url,
     image: api.image,
+    images: api.images ?? [],
     rating: api.rating,
     externalId: api.external_id ?? null,
     projectId: api.project_id ?? null,

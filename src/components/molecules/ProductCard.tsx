@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import type { Product } from "@/domain/models/product.types";
 import { Badge } from "@/components/atoms/Badge";
@@ -14,12 +15,21 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("shop");
 
+  // Galería: imagen principal + imágenes extra
+  const allImages = [product.image, ...product.images];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const hasManyImages = allImages.length > 1;
+
+  const prev = () => setActiveIndex((i) => (i - 1 + allImages.length) % allImages.length);
+  const next = () => setActiveIndex((i) => (i + 1) % allImages.length);
+
   return (
     <article className="group bg-white dark:bg-neutral-800 rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-md)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-in-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1">
       <div className="relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-700">
         <Image
-          src={product.image}
-          alt={product.name}
+          src={allImages[activeIndex]}
+          alt={`${product.name} — imagen ${activeIndex + 1}`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain p-4 transition-transform duration-[var(--duration-slow)] group-hover:scale-105"
@@ -27,6 +37,45 @@ export function ProductCard({ product }: ProductCardProps) {
         <Badge className="absolute top-3 left-3">
           {t(product.category)}
         </Badge>
+
+        {hasManyImages && (
+          <>
+            <button
+              onClick={prev}
+              aria-label="Imagen anterior"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full bg-white/80 dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200 opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-fast)] hover:bg-white dark:hover:bg-neutral-900 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <button
+              onClick={next}
+              aria-label="Imagen siguiente"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full bg-white/80 dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200 opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-fast)] hover:bg-white dark:hover:bg-neutral-900 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {/* Indicadores de punto */}
+            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
+              {allImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`Ver imagen ${i + 1}`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-[var(--duration-fast)] ${
+                    i === activeIndex
+                      ? "bg-neutral-800 dark:bg-white w-3"
+                      : "bg-neutral-400 dark:bg-neutral-500"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
       <div className="p-5">
         <h3 className="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-2 line-clamp-2 font-[family-name:var(--font-heading)]">

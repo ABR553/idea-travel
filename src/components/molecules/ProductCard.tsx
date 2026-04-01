@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <article className="group bg-white dark:bg-neutral-800 rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-md)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-in-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1">
       <div className="relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-700">
         <Image
-          src={allImages[activeIndex]}
+          src={allImages[activeIndex] ?? ''}
           alt={`${product.name} — imagen ${activeIndex + 1}`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

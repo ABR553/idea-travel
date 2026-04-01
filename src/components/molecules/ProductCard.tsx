@@ -16,7 +16,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("shop");
 
   // Galería: imagen principal + imágenes extra
-  const allImages = [product.image, ...product.images];
+  const allImages = [product.image, ...product.images].filter((img): img is string => Boolean(img));
   const [activeIndex, setActiveIndex] = useState(0);
 
   const hasManyImages = allImages.length > 1;

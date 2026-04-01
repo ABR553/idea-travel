@@ -15,8 +15,10 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("shop");
 
-  // Galería: imagen principal + imágenes extra
-  const allImages = [product.image, ...product.images].filter((img): img is string => Boolean(img));
+  // Galería: usa images del backend; fallback a image si images está vacío
+  const allImages = product.images.filter((img): img is string => Boolean(img)).length > 0
+    ? product.images.filter((img): img is string => Boolean(img))
+    : [product.image].filter((img): img is string => Boolean(img));
   const [activeIndex, setActiveIndex] = useState(0);
 
   const hasManyImages = allImages.length > 1;
@@ -29,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="relative aspect-square overflow-hidden bg-neutral-100 dark:bg-neutral-700">
         <Image
           src={allImages[activeIndex] ?? ''}
-          alt={`${product.name} — imagen ${activeIndex + 1}`}
+          alt={`imagen ${activeIndex + 1}`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-contain p-4 transition-transform duration-[var(--duration-slow)] group-hover:scale-105"

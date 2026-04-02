@@ -17,7 +17,7 @@ export function CategoryFilter({ selected, categories }: CategoryFilterProps) {
   const t = useTranslations("shop");
 
   return (
-    <div className="flex flex-wrap gap-2 mb-10">
+    <div className="flex flex-wrap gap-2 mt-6 mb-10">
       {["all", ...categories].map((cat) => (
         <button
           key={cat}

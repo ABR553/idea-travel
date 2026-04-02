@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { blogRepository } from "@/infrastructure/repositories/blog.repository";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
@@ -108,8 +110,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:underline-offset-2
             prose-img:rounded-[var(--radius-lg)]
             prose-p:leading-relaxed prose-li:leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: markdownToHtml(post.content) }}
-        />
+        >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              a: ({ href, children }) => (
+                <a href={href} rel="nofollow sponsored" target="_blank">
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
+        </div>
 
         <div className="mt-10 pt-8 border-t border-neutral-200 dark:border-neutral-700">
           <AffiliateDisclosure variant="banner" />
@@ -119,40 +133,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   );
 }
 
-/**
- * Convierte markdown basico a HTML.
- * Soporta: ## headings, **bold**, [links](url), parrafos, listas (- item)
- */
-function markdownToHtml(markdown: string): string {
-  return markdown
-    .split("\n\n")
-    .map((block) => {
-      const trimmed = block.trim();
-      if (!trimmed) return "";
-
-      // Headings
-      if (trimmed.startsWith("## ")) {
-        return `<h2>${processInline(trimmed.slice(3))}</h2>`;
-      }
-      if (trimmed.startsWith("### ")) {
-        return `<h3>${processInline(trimmed.slice(4))}</h3>`;
-      }
-
-      // List blocks
-      const lines = trimmed.split("\n");
-      if (lines.every((l) => l.startsWith("- "))) {
-        const items = lines.map((l) => `<li>${processInline(l.slice(2))}</li>`).join("");
-        return `<ul>${items}</ul>`;
-      }
-
-      // Regular paragraph
-      return `<p>${processInline(trimmed.replace(/\n/g, "<br/>"))}</p>`;
-    })
-    .join("");
-}
-
-function processInline(text: string): string {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" rel="nofollow sponsored" target="_blank">$1</a>');
-}

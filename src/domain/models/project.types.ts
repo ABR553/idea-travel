@@ -9,4 +9,4 @@ export interface Project {
  * Slug del proyecto activo en esta instancia del frontend.
  * Constante fija — no usar variables de entorno.
  */
-export const CURRENT_PROJECT_SLUG = "idea-travel" as const;
+export const CURRENT_PROJECT_SLUG = "tengounviaje-21" as const;

@@ -12,11 +12,23 @@ export interface DestinationDetail extends Destination {
   experiences: Experience[];
 }
 
+export interface RecommendedProduct {
+  slug: string;
+  name: string;
+  image: string;
+  price: number;
+  currency: string;
+  affiliateUrl: string;
+  contextText: string | null;
+}
+
 export interface RouteStep {
   day: number;
   title: string;
   description: string;
   destination: string;
+  detailedDescription: string | null;
+  recommendedProducts: RecommendedProduct[];
 }
 
 export type AccommodationTier = "budget" | "standard" | "premium";

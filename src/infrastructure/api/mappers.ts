@@ -9,6 +9,7 @@ import type {
   Experience,
   ExperienceProvider,
   RouteStep,
+  RecommendedProduct,
 } from "@/domain/models/pack.types";
 import type { Product, ProductCategory } from "@/domain/models/product.types";
 import type { Project } from "@/domain/models/project.types";
@@ -61,11 +62,23 @@ interface ApiDestinationDetail extends ApiDestination {
   experiences: ApiExperience[];
 }
 
+interface ApiRecommendedProduct {
+  slug: string;
+  name: string;
+  image: string;
+  price: number;
+  currency: string;
+  affiliate_url: string;
+  context_text: string | null;
+}
+
 interface ApiRouteStep {
   day: number;
   title: string;
   description: string;
   destination: string;
+  detailed_description: string | null;
+  recommended_products: ApiRecommendedProduct[];
 }
 
 export interface ApiPackListResponse {
@@ -199,12 +212,26 @@ function mapDestinationDetail(api: ApiDestinationDetail): DestinationDetail {
   };
 }
 
+function mapRecommendedProduct(api: ApiRecommendedProduct): RecommendedProduct {
+  return {
+    slug: api.slug,
+    name: api.name,
+    image: api.image,
+    price: api.price,
+    currency: api.currency,
+    affiliateUrl: api.affiliate_url,
+    contextText: api.context_text,
+  };
+}
+
 function mapRouteStep(api: ApiRouteStep): RouteStep {
   return {
     day: api.day,
     title: api.title,
     description: api.description,
     destination: api.destination,
+    detailedDescription: api.detailed_description,
+    recommendedProducts: (api.recommended_products ?? []).map(mapRecommendedProduct),
   };
 }
 

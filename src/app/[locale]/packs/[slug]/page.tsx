@@ -6,6 +6,7 @@ import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { AccommodationCard } from "@/components/molecules/AccommodationCard";
 import { ExperienceCard } from "@/components/molecules/ExperienceCard";
+import { RouteStepDetail } from "@/components/molecules/RouteStepDetail";
 import { Badge } from "@/components/atoms/Badge";
 import { formatPrice } from "@/lib/format";
 import { generateTouristTripJsonLd } from "@/lib/seo";
@@ -127,27 +128,13 @@ export default async function PackDetailPage({ params }: PackPageProps) {
           <h2 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 font-[family-name:var(--font-heading)] mb-8">
             {t("dailyRoute")}
           </h2>
-          <div className="space-y-6">
-            {pack.route.map((step) => (
-              <div key={step.day} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center text-sm font-bold shrink-0">
-                    {step.day}
-                  </div>
-                  {step.day < pack.route.length && (
-                    <div className="w-0.5 flex-1 bg-primary-200 dark:bg-primary-800 mt-2" />
-                  )}
-                </div>
-                <div className="pb-6">
-                  <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 font-[family-name:var(--font-heading)]">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{step.description}</p>
-                  <Badge variant="budget" className="mt-2">
-                    {step.destination}
-                  </Badge>
-                </div>
-              </div>
+          <div className="space-y-0">
+            {pack.route.map((step, index) => (
+              <RouteStepDetail
+                key={step.day}
+                step={step}
+                isLast={index === pack.route.length - 1}
+              />
             ))}
           </div>
         </section>

@@ -36,12 +36,6 @@ interface PackViewParams {
   destination_count?: number;
 }
 
-interface FlightSearchParams {
-  origin?: string;
-  destination?: string;
-  trip_type?: "roundtrip" | "oneway";
-}
-
 export function trackAffiliateClick(params: AffiliateClickParams): void {
   if (!hasAnalyticsConsent()) return;
   const gtag = getGtag();
@@ -54,13 +48,6 @@ export function trackPackView(params: PackViewParams): void {
   const gtag = getGtag();
   if (!gtag) return;
   gtag("event", "pack_view", params);
-}
-
-export function trackFlightSearch(params: FlightSearchParams): void {
-  if (!hasAnalyticsConsent()) return;
-  const gtag = getGtag();
-  if (!gtag) return;
-  gtag("event", "flight_search", params);
 }
 
 export function trackPageView(url: string): void {

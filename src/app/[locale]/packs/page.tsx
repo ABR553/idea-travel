@@ -5,6 +5,7 @@ import { PackFilters } from "@/components/organisms/PackFilters";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs";
 import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import type { PackFiltersParams, PackSortBy } from "@/domain/models/pack.types";
+import { DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 interface PacksPageProps {
   params: Promise<{ locale: string }>;
@@ -27,11 +28,20 @@ export async function generateMetadata({ params }: PacksPageProps): Promise<Meta
     openGraph: {
       title: `${t("title")} | Tengo Un Viaje`,
       description: t("metaDescription"),
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${t("title")} | Tengo Un Viaje`,
+      description: t("metaDescription"),
+      images: [DEFAULT_OG_IMAGE],
     },
     alternates: {
+      canonical: `/${locale}/packs`,
       languages: {
         es: "/es/packs",
         en: "/en/packs",
+        "x-default": "/es/packs",
       },
     },
   };

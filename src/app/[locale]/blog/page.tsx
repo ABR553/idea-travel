@@ -15,6 +15,18 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+    },
+    alternates: {
+      canonical: `/${locale}/blog`,
+      languages: {
+        es: "/es/blog",
+        en: "/en/blog",
+        "x-default": "/es/blog",
+      },
+    },
   };
 }
 

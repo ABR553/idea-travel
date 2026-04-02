@@ -13,9 +13,8 @@ export function Hero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80"
-          alt=""
+          alt="Viajero con mochila explorando un destino de viaje"
           className="w-full h-full object-cover opacity-40"
-          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/80 via-neutral-900/50 to-transparent" />
       </div>
@@ -35,12 +34,6 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 animate-[fadeInUp_var(--duration-slower)_var(--ease-out)_800ms_both]">
             <Link href="/packs">
               <Button size="lg">{t("heroCtaPacks")}</Button>
-            </Link>
-            <Link
-              href="/vuelos"
-              className="inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 text-lg rounded-[var(--radius-lg)] border border-white/30 text-white transition-all duration-[var(--duration-fast)] ease-[var(--ease-in-out)] hover:bg-white/10 hover:border-white/50 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-            >
-              {t("heroCtaFlights")}
             </Link>
           </div>
         </div>

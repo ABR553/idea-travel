@@ -8,7 +8,8 @@ import { Button } from "@/components/atoms/Button";
 import { packRepository } from "@/infrastructure/repositories/pack.repository";
 import { productRepository } from "@/infrastructure/repositories/product.repository";
 import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
-import { generateWebsiteJsonLd } from "@/lib/seo";
+import { generateWebsiteJsonLd, generateOrganizationJsonLd, generateBreadcrumbJsonLd, generateItemListJsonLd, generateFAQJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 export const revalidate = 60;
 
@@ -30,14 +31,28 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
       siteName: tCommon("siteName"),
       title: t("title", { siteName: tCommon("siteName") }),
       description: tCommon("siteDescription"),
+      url: `/${locale}`,
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: tCommon("siteName"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
+      title: t("title", { siteName: tCommon("siteName") }),
+      description: tCommon("siteDescription"),
+      images: [DEFAULT_OG_IMAGE],
     },
     alternates: {
+      canonical: `/${locale}`,
       languages: {
         es: "/es",
         en: "/en",
+        "x-default": "/es",
       },
     },
   };
@@ -65,13 +80,58 @@ export default async function HomePage({ params }: HomePageProps) {
   } catch {
     // API unavailable during build
   }
-  const jsonLd = generateWebsiteJsonLd();
+  const websiteJsonLd = generateWebsiteJsonLd();
+  const organizationJsonLd = generateOrganizationJsonLd();
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: locale === "es" ? "Inicio" : "Home", url: `/${locale}` },
+  ]);
+  const itemListJsonLd = featuredPacks.length > 0
+    ? generateItemListJsonLd(
+        featuredPacks.map((pack, i) => ({
+          name: pack.title,
+          url: `/${locale}/packs/${pack.slug}`,
+          image: pack.coverImage,
+          position: i + 1,
+        }))
+      )
+    : null;
+  const faqJsonLd = generateFAQJsonLd(
+    locale === "es"
+      ? [
+          { question: "Que es un pack de viaje?", answer: "Un pack de viaje es una ruta completa curada con alojamientos seleccionados para diferentes presupuestos y las mejores experiencias locales en cada destino." },
+          { question: "Los precios incluyen vuelos?", answer: "Los precios indicados son orientativos para alojamiento y experiencias. Los vuelos se buscan por separado para que puedas encontrar la mejor oferta desde tu ciudad de origen." },
+          { question: "Como funcionan los enlaces de afiliado?", answer: "Cuando reservas a traves de nuestros enlaces, recibimos una pequena comision sin ningun coste adicional para ti. Esto nos permite mantener la web y seguir creando contenido de calidad." },
+        ]
+      : [
+          { question: "What is a travel pack?", answer: "A travel pack is a complete curated route with selected accommodations for different budgets and the best local experiences at each destination." },
+          { question: "Do prices include flights?", answer: "Listed prices are indicative for accommodations and experiences. Flights are searched separately so you can find the best deal from your city of origin." },
+          { question: "How do affiliate links work?", answer: "When you book through our links, we receive a small commission at no additional cost to you. This allows us to maintain the website and keep creating quality content." },
+        ]
+  );
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {itemListJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <Hero />
@@ -92,21 +152,6 @@ export default async function HomePage({ params }: HomePageProps) {
             <Button variant="secondary" size="lg">
               {t("viewAllPacks")}
             </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Flight CTA */}
-      <section className="bg-primary-50 dark:bg-neutral-900 py-16 lg:py-24">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-100 font-[family-name:var(--font-heading)] mb-4">
-            {t("flightCtaTitle")}
-          </h2>
-          <p className="text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto mb-8">
-            {t("flightCtaDescription")}
-          </p>
-          <Link href="/vuelos">
-            <Button size="lg">{t("flightCtaButton")}</Button>
           </Link>
         </div>
       </section>

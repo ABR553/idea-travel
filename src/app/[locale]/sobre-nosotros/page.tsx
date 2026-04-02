@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "es" ? "/es/sobre-nosotros" : "/en/about-us",
+      languages: {
+        es: "/es/sobre-nosotros",
+        en: "/en/about-us",
+        "x-default": "/es/sobre-nosotros",
+      },
+    },
   };
 }
 

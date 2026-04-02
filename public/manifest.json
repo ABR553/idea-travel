@@ -1,0 +1,16 @@
+{
+  "name": "Tengo Un Viaje",
+  "short_name": "TengoUnViaje",
+  "description": "Descubre packs de viaje curados con rutas, alojamientos y experiencias locales.",
+  "start_url": "/es",
+  "display": "browser",
+  "background_color": "#FAFAF9",
+  "theme_color": "#0D9488",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

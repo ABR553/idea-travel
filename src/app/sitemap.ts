@@ -22,15 +22,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   const locales = routing.locales;
 
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
   const staticPages = [
-    { path: "", priority: 1, changeFrequency: "daily" as const },
-    { path: "/packs", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/tienda", priority: 0.7, changeFrequency: "weekly" as const },
-    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
-    { path: "/sobre-nosotros", priority: 0.3, changeFrequency: "monthly" as const },
-    { path: "/privacidad", priority: 0.2, changeFrequency: "monthly" as const },
-    { path: "/terminos", priority: 0.2, changeFrequency: "monthly" as const },
-    { path: "/cookies", priority: 0.2, changeFrequency: "monthly" as const },
+    { path: "", priority: 1, changeFrequency: "daily" as const, lastModified: now },
+    { path: "/packs", priority: 0.9, changeFrequency: "weekly" as const, lastModified: now },
+    { path: "/tienda", priority: 0.7, changeFrequency: "weekly" as const, lastModified: now },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const, lastModified: now },
+    { path: "/sobre-nosotros", priority: 0.3, changeFrequency: "monthly" as const, lastModified: weekAgo },
+    { path: "/privacidad", priority: 0.2, changeFrequency: "monthly" as const, lastModified: weekAgo },
+    { path: "/terminos", priority: 0.2, changeFrequency: "monthly" as const, lastModified: weekAgo },
+    { path: "/cookies", priority: 0.2, changeFrequency: "monthly" as const, lastModified: weekAgo },
   ];
 
   const entries: MetadataRoute.Sitemap = [];
@@ -39,14 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const locale of locales) {
       let localizedPath = page.path;
       if (locale === "en") {
-        localizedPath = localizedPath
-          .replace("/vuelos", "/flights")
-          .replace("/tienda", "/shop");
+        localizedPath = localizedPath.replace("/tienda", "/shop");
       }
 
       entries.push({
         url: `${SITE_URL}/${locale}${localizedPath}`,
-        lastModified: new Date(),
+        lastModified: page.lastModified,
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: {
@@ -54,9 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             locales.map((l) => {
               let altPath = page.path;
               if (l === "en") {
-                altPath = altPath
-                  .replace("/vuelos", "/flights")
-                  .replace("/tienda", "/shop");
+                altPath = altPath.replace("/tienda", "/shop");
               }
               return [l, `${SITE_URL}/${l}${altPath}`];
             })

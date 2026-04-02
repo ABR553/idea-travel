@@ -62,6 +62,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           }}
         />
         <meta name="color-scheme" content="light dark" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://m.media-amazon.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className="min-h-screen flex flex-col bg-neutral-50 dark:bg-[#0C0A09] text-neutral-600 dark:text-neutral-300 antialiased transition-colors duration-[var(--duration-normal)]">
         <NextIntlClientProvider messages={messages}>

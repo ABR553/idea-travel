@@ -42,9 +42,11 @@ export async function generateMetadata({ params }: PackPageProps): Promise<Metad
       locale: locale === "en" ? "en_US" : "es_ES",
     },
     alternates: {
+      canonical: `/${locale}/packs/${slug}`,
       languages: {
         es: `/es/packs/${slug}`,
         en: `/en/packs/${slug}`,
+        "x-default": `/es/packs/${slug}`,
       },
     },
   };

@@ -7,6 +7,7 @@ import { projectRepository } from "@/infrastructure/repositories/project.reposit
 import { AffiliateDisclosure } from "@/components/molecules/AffiliateDisclosure";
 import { AmazonPrimeBanner } from "@/components/molecules/AmazonPrimeBanner";
 import { CURRENT_PROJECT_SLUG } from "@/domain/models/project.types";
+import { DEFAULT_OG_IMAGE } from "@/lib/constants";
 
 interface TiendaPageProps {
   params: Promise<{ locale: string }>;
@@ -23,11 +24,20 @@ export async function generateMetadata({ params }: TiendaPageProps): Promise<Met
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      images: [DEFAULT_OG_IMAGE],
     },
     alternates: {
+      canonical: locale === "es" ? "/es/tienda" : "/en/shop",
       languages: {
         es: "/es/tienda",
         en: "/en/shop",
+        "x-default": "/es/tienda",
       },
     },
   };

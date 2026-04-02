@@ -1,7 +1,7 @@
 import type { PackDetail } from "@/domain/models/pack.types";
 import type { Product } from "@/domain/models/product.types";
 import type { BlogPostListItem, BlogPost } from "@/domain/models/blog.types";
-import { SITE_NAME, SITE_URL } from "./constants";
+import { SITE_NAME, SITE_URL, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "./constants";
 
 interface BreadcrumbItem {
   name: string;
@@ -21,12 +21,71 @@ export function generateBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
+export function generateOrganizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/favicon.ico`,
+    description: SITE_DESCRIPTION,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "hola@tengounviaje.com",
+      contactType: "customer service",
+      availableLanguage: ["Spanish", "English"],
+    },
+  };
+}
+
 export function generateWebsiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    inLanguage: ["es", "en"],
+    image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/es/packs?search={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function generateItemListJsonLd(items: { name: string; url: string; image?: string; position: number }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item) => ({
+      "@type": "ListItem",
+      position: item.position,
+      name: item.name,
+      url: `${SITE_URL}${item.url}`,
+      ...(item.image && { image: item.image }),
+    })),
+  };
+}
+
+export function generateFAQJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 

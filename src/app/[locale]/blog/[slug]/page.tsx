@@ -30,6 +30,20 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: "article",
       publishedTime: post.publishedAt ?? undefined,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.coverImage ? [post.coverImage] : undefined,
+    },
+    alternates: {
+      canonical: `/${locale}/blog/${slug}`,
+      languages: {
+        es: `/es/blog/${slug}`,
+        en: `/en/blog/${slug}`,
+        "x-default": `/es/blog/${slug}`,
+      },
+    },
   };
 }
 

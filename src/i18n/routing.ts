@@ -10,10 +10,6 @@ export const routing = defineRouting({
     "/": "/",
     "/packs": "/packs",
     "/packs/[slug]": "/packs/[slug]",
-    "/vuelos": {
-      es: "/vuelos",
-      en: "/flights",
-    },
     "/tienda": {
       es: "/tienda",
       en: "/shop",

@@ -2,30 +2,23 @@
 
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import type { ProductCategory } from "@/domain/models/product.types";
 
-const ALL_CATEGORIES: (ProductCategory | "all")[] = [
-  "all",
-  "luggage",
-  "electronics",
-  "accessories",
-  "comfort",
-  "photography",
-  "maletas",
-  "mochilas_cabina",
-];
+function formatCategory(cat: string): string {
+  return cat.split("_").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
 
 interface CategoryFilterProps {
   selected: string;
+  categories: string[];
 }
 
-export function CategoryFilter({ selected }: CategoryFilterProps) {
+export function CategoryFilter({ selected, categories }: CategoryFilterProps) {
   const router = useRouter();
   const t = useTranslations("shop");
 
   return (
     <div className="flex flex-wrap gap-2 mb-10">
-      {ALL_CATEGORIES.map((cat) => (
+      {["all", ...categories].map((cat) => (
         <button
           key={cat}
           onClick={() => {
@@ -38,7 +31,7 @@ export function CategoryFilter({ selected }: CategoryFilterProps) {
               : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           }`}
         >
-          {t(cat)}
+          {cat === "all" ? t("all") : formatCategory(cat)}
         </button>
       ))}
     </div>

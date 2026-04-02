@@ -131,18 +131,12 @@ export interface ApiPaginatedResponse<T> {
 
 const VALID_TIERS = new Set<AccommodationTier>(["budget", "standard", "premium"]);
 const VALID_PROVIDERS = new Set<ExperienceProvider>(["getyourguide", "civitatis"]);
-const VALID_CATEGORIES = new Set<Product["category"]>(["luggage", "electronics", "accessories", "comfort", "photography", "maletas", "mochilas_cabina"]);
-
 function validateTier(tier: string): AccommodationTier {
   return VALID_TIERS.has(tier as AccommodationTier) ? (tier as AccommodationTier) : "standard";
 }
 
 function validateProvider(provider: string): ExperienceProvider {
   return VALID_PROVIDERS.has(provider as ExperienceProvider) ? (provider as ExperienceProvider) : "getyourguide";
-}
-
-function validateCategory(category: string): Product["category"] {
-  return VALID_CATEGORIES.has(category as Product["category"]) ? (category as Product["category"]) : "accessories";
 }
 
 // --- Mappers ---
@@ -247,7 +241,7 @@ export function mapProduct(api: ApiProductResponse): Product {
     slug: api.slug,
     name: api.name,
     description: api.description,
-    category: validateCategory(api.category),
+    category: api.category,
     price: api.price,
     currency: api.currency,
     affiliateUrl: api.affiliate_url,

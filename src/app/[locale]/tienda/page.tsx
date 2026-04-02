@@ -41,8 +41,14 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
   const t = await getTranslations("shop");
   const tCommon = await getTranslations("common");
 
-  const validCategories = ["luggage", "electronics", "accessories", "comfort", "photography", "maletas", "mochilas_cabina"];
-  const selectedCategory = category && validCategories.includes(category) ? category : "all";
+  let categories: string[] = [];
+  try {
+    categories = await projectRepository.getProjectCategories(CURRENT_PROJECT_SLUG);
+  } catch {
+    // API unavailable during build
+  }
+
+  const selectedCategory = category && categories.includes(category) ? category : "all";
 
   let filteredProducts: Awaited<ReturnType<typeof projectRepository.getProjectProducts>>["data"] = [];
   try {
@@ -77,7 +83,7 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
 
       <AffiliateDisclosure variant="banner" />
 
-      <CategoryFilter selected={selectedCategory} />
+      <CategoryFilter selected={selectedCategory} categories={categories} />
 
       <AmazonPrimeBanner />
 

@@ -4,6 +4,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import type { Product } from "@/domain/models/product.types";
+
+function formatCategory(cat: string): string {
+  return cat.split("_").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
 import { Badge } from "@/components/atoms/Badge";
 import { Rating } from "@/components/atoms/Rating";
 import { formatPriceDecimal } from "@/lib/format";
@@ -37,7 +41,7 @@ export function ProductCard({ product }: ProductCardProps) {
           className="object-contain p-4 transition-transform duration-[var(--duration-slow)] group-hover:scale-105"
         />
         <Badge className="absolute top-3 left-3">
-          {t(product.category)}
+          {formatCategory(product.category)}
         </Badge>
 
         {hasManyImages && (

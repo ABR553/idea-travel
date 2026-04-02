@@ -26,6 +26,10 @@ export class ProjectRepository {
     }
   }
 
+  async getProjectCategories(slug: string): Promise<string[]> {
+    return apiFetch<string[]>(`/projects/${slug}/products/categories`);
+  }
+
   async getProjectProducts(
     slug: string,
     locale: string = "es",

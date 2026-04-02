@@ -1,18 +1,9 @@
-export type ProductCategory =
-  | "luggage"
-  | "electronics"
-  | "accessories"
-  | "comfort"
-  | "photography"
-  | "maletas"
-  | "mochilas_cabina";
-
 export interface Product {
   id: string;
   slug: string;
   name: string;
   description: string;
-  category: ProductCategory;
+  category: string;
   price: number;
   currency: string;
   affiliateUrl: string;
@@ -23,13 +14,3 @@ export interface Product {
   projectId?: string | null;
   link?: string | null;
 }
-
-export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
-  luggage: "Equipaje",
-  electronics: "Electronica",
-  accessories: "Accesorios",
-  comfort: "Confort",
-  photography: "Fotografia",
-  maletas: "Maletas",
-  mochilas_cabina: "Mochilas de cabina",
-};

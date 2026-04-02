@@ -10,7 +10,7 @@ import type {
   ExperienceProvider,
   RouteStep,
 } from "@/domain/models/pack.types";
-import type { Product } from "@/domain/models/product.types";
+import type { Product, ProductCategory } from "@/domain/models/product.types";
 import type { Project } from "@/domain/models/project.types";
 
 // --- API response types (snake_case) ---
@@ -131,12 +131,17 @@ export interface ApiPaginatedResponse<T> {
 
 const VALID_TIERS = new Set<AccommodationTier>(["budget", "standard", "premium"]);
 const VALID_PROVIDERS = new Set<ExperienceProvider>(["getyourguide", "civitatis"]);
+const VALID_CATEGORIES = new Set<ProductCategory>(["luggage", "electronics", "accessories", "comfort", "photography", "maletas", "mochilas_cabina"]);
 function validateTier(tier: string): AccommodationTier {
   return VALID_TIERS.has(tier as AccommodationTier) ? (tier as AccommodationTier) : "standard";
 }
 
 function validateProvider(provider: string): ExperienceProvider {
   return VALID_PROVIDERS.has(provider as ExperienceProvider) ? (provider as ExperienceProvider) : "getyourguide";
+}
+
+function validateCategory(category: string): ProductCategory {
+  return VALID_CATEGORIES.has(category as ProductCategory) ? (category as ProductCategory) : "accessories";
 }
 
 // --- Mappers ---
@@ -241,7 +246,7 @@ export function mapProduct(api: ApiProductResponse): Product {
     slug: api.slug,
     name: api.name,
     description: api.description,
-    category: api.category,
+    category: validateCategory(api.category),
     price: api.price,
     currency: api.currency,
     affiliateUrl: api.affiliate_url,

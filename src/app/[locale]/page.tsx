@@ -57,8 +57,11 @@ export default async function HomePage({ params }: HomePageProps) {
     // API unavailable during build
   }
   try {
-    const productsResponse = await productRepository.getAllProducts(locale, 1, 4);
-    popularProducts = productsResponse.data;
+    const [maletasRes, mochilasCabinaRes] = await Promise.all([
+      productRepository.getProductsByCategory("maletas", locale, 1, 4),
+      productRepository.getProductsByCategory("mochilas_cabina", locale, 1, 4),
+    ]);
+    popularProducts = [...maletasRes.data, ...mochilasCabinaRes.data];
   } catch {
     // API unavailable during build
   }

@@ -3,7 +3,9 @@ export type ProductCategory =
   | "electronics"
   | "accessories"
   | "comfort"
-  | "photography";
+  | "photography"
+  | "maletas"
+  | "mochilas_cabina";
 
 export interface Product {
   id: string;
@@ -28,4 +30,6 @@ export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
   accessories: "Accesorios",
   comfort: "Confort",
   photography: "Fotografia",
+  maletas: "Maletas",
+  mochilas_cabina: "Mochilas de cabina",
 };

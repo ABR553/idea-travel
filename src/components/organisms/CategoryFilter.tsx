@@ -11,6 +11,8 @@ const ALL_CATEGORIES: (ProductCategory | "all")[] = [
   "accessories",
   "comfort",
   "photography",
+  "maletas",
+  "mochilas_cabina",
 ];
 
 interface CategoryFilterProps {

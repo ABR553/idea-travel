@@ -41,7 +41,7 @@ export default async function TiendaPage({ params, searchParams }: TiendaPagePro
   const t = await getTranslations("shop");
   const tCommon = await getTranslations("common");
 
-  const validCategories = ["luggage", "electronics", "accessories", "comfort", "photography"];
+  const validCategories = ["luggage", "electronics", "accessories", "comfort", "photography", "maletas", "mochilas_cabina"];
   const selectedCategory = category && validCategories.includes(category) ? category : "all";
 
   let filteredProducts: Awaited<ReturnType<typeof projectRepository.getProjectProducts>>["data"] = [];

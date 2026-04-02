@@ -131,7 +131,7 @@ export interface ApiPaginatedResponse<T> {
 
 const VALID_TIERS = new Set<AccommodationTier>(["budget", "standard", "premium"]);
 const VALID_PROVIDERS = new Set<ExperienceProvider>(["getyourguide", "civitatis"]);
-const VALID_CATEGORIES = new Set<Product["category"]>(["luggage", "electronics", "accessories", "comfort", "photography"]);
+const VALID_CATEGORIES = new Set<Product["category"]>(["luggage", "electronics", "accessories", "comfort", "photography", "maletas", "mochilas_cabina"]);
 
 function validateTier(tier: string): AccommodationTier {
   return VALID_TIERS.has(tier as AccommodationTier) ? (tier as AccommodationTier) : "standard";

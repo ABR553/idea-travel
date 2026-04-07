@@ -8,6 +8,7 @@ import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { GoogleAnalytics } from "@/components/atoms/GoogleAnalytics";
+import { PageTracker } from "@/components/atoms/PageTracker";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/constants";
@@ -83,6 +84,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <Footer />
           <CookieBanner />
           <GoogleAnalytics />
+          <PageTracker />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -11,6 +11,7 @@ import { Badge } from "@/components/atoms/Badge";
 import { formatPrice } from "@/lib/format";
 import { generateTouristTripJsonLd } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
+import { PackViewTracker } from "@/components/atoms/PackViewTracker";
 
 interface PackPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -68,6 +69,11 @@ export default async function PackDetailPage({ params }: PackPageProps) {
 
   return (
     <>
+      <PackViewTracker
+        packName={pack.title}
+        packSlug={pack.slug}
+        destinationCount={pack.destinations.length}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

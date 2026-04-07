@@ -7,6 +7,7 @@ import { Badge } from "@/components/atoms/Badge";
 import { Rating } from "@/components/atoms/Rating";
 import { formatPrice } from "@/lib/format";
 import { trackExperienceClick } from "@/lib/track-click";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -26,7 +27,10 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       href={experience.affiliateUrl}
       rel="noopener nofollow sponsored"
       target="_blank"
-      onClick={() => trackExperienceClick(experience.id)}
+      onClick={() => {
+        trackExperienceClick(experience.id);
+        trackAffiliateClick({ provider: experience.provider, item_name: experience.title, url: experience.affiliateUrl });
+      }}
       className="group block bg-white dark:bg-neutral-800 rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-md)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-in-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1"
     >
       <div className="relative aspect-[16/10] overflow-hidden">

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { TrackedAffiliateLink } from "@/components/atoms/TrackedAffiliateLink";
 
 const AMAZON_PRIME_URL =
   "https://www.amazon.es/amazonprime?_encoding=UTF8&primeCampaignId=prime_assoc_ft&tag=tengounviaje-21";
@@ -37,10 +38,10 @@ export async function AmazonPrimeBanner() {
       </div>
 
       {/* CTA */}
-      <a
+      <TrackedAffiliateLink
         href={AMAZON_PRIME_URL}
-        target="_blank"
-        rel="nofollow sponsored noopener"
+        provider="amazon"
+        itemName="Amazon Prime"
         className="flex-shrink-0 inline-flex items-center gap-2 bg-[#FF9900] hover:bg-[#e88b00] active:bg-[#d47e00] text-[#1C1917] font-bold text-sm px-5 py-2.5 rounded-[var(--radius-md)] transition-colors duration-[var(--duration-fast)] whitespace-nowrap min-h-[44px]"
       >
         {t("primeBannerCta")}
@@ -57,7 +58,7 @@ export async function AmazonPrimeBanner() {
         >
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
-      </a>
+      </TrackedAffiliateLink>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { PackListItem } from "@/domain/models/pack.types";
 import { Badge } from "@/components/atoms/Badge";
 import { formatPrice } from "@/lib/format";
+import { trackPackView } from "@/lib/analytics";
 
 interface PackCardProps {
   pack: PackListItem;
@@ -16,7 +17,12 @@ export function PackCard({ pack }: PackCardProps) {
 
   return (
     <article className="group relative bg-white dark:bg-neutral-800 rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-md)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-in-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 hover:bg-primary-50/30 dark:hover:bg-neutral-700/50">
-      <Link href={{ pathname: "/packs/[slug]", params: { slug: pack.slug } }} className="block" aria-label={`${t("viewPack")}: ${pack.title}`}>
+      <Link
+        href={{ pathname: "/packs/[slug]", params: { slug: pack.slug } }}
+        className="block"
+        aria-label={`${t("viewPack")}: ${pack.title}`}
+        onClick={() => trackPackView({ pack_name: pack.title, pack_slug: pack.slug, destination_count: pack.destinations.length })}
+      >
         <div className="relative aspect-[4/3] overflow-hidden">
           <Image
             src={pack.coverImage}

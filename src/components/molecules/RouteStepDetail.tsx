@@ -8,6 +8,7 @@ import Link from "next/link";
 import type { RouteStep, RecommendedProduct } from "@/domain/models/pack.types";
 import { Badge } from "@/components/atoms/Badge";
 import { formatPrice } from "@/lib/format";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 interface RouteStepDetailProps {
   step: RouteStep;
@@ -25,6 +26,7 @@ function ProductMiniCard({ product }: { product: RecommendedProduct }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer sponsored"
+      onClick={() => trackAffiliateClick({ provider: "amazon", item_name: product.name, url: href })}
       className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-warning-200 bg-warning-50 p-3 transition-shadow hover:shadow-[var(--shadow-md)] dark:bg-warning-950/30 dark:border-warning-800"
     >
       <div className="relative w-12 h-12 rounded-[var(--radius-md)] overflow-hidden shrink-0 bg-neutral-100 dark:bg-neutral-800">

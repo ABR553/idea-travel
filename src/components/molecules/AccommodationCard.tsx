@@ -7,6 +7,7 @@ import { Badge } from "@/components/atoms/Badge";
 import { Rating } from "@/components/atoms/Rating";
 import { formatPrice } from "@/lib/format";
 import { trackAccommodationClick } from "@/lib/track-click";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 interface AccommodationCardProps {
   accommodation: Accommodation;
@@ -97,7 +98,10 @@ export function AccommodationCard({ accommodation }: AccommodationCardProps) {
               href={accommodation.bookingUrl}
               rel="noopener nofollow sponsored"
               target="_blank"
-              onClick={() => trackAccommodationClick(accommodation.id)}
+              onClick={() => {
+                trackAccommodationClick(accommodation.id);
+                trackAffiliateClick({ provider: "booking", item_name: accommodation.name, url: accommodation.bookingUrl });
+              }}
               className="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline underline-offset-4 transition-colors shrink-0"
             >
               {tDetail("bookNow")} &rarr;

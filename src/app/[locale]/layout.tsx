@@ -61,6 +61,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             __html: `(function(){try{var t=localStorage.getItem('idea-travel-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
           }}
         />
+        <meta name="google-site-verification" content="_K9jSkqzqdZjEt2CF7W9JRkDxlhldYzQD98VmKb2kD8" />
         <meta name="color-scheme" content="light dark" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://images.unsplash.com" />

@@ -13,7 +13,7 @@ export function usePageTracking(): void {
   const prevPathname = useRef(pathname);
 
   useEffect(() => {
-    if (pathname !== prevPathname.current) {
+    if (pathname && pathname !== prevPathname.current) {
       trackPageView(pathname);
       prevPathname.current = pathname;
     }

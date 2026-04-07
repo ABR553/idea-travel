@@ -1,7 +1,7 @@
 export const SITE_NAME = "Tengo Un Viaje";
 export const SITE_DESCRIPTION =
   "Descubre packs de viaje curados con rutas, alojamientos y experiencias locales. Encuentra el mejor equipamiento para tu proxima aventura.";
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tengounviaje.com";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tengounviaje.com";
 
 export const DEFAULT_OG_IMAGE = "/og-default.jpg";
 export const SITE_CONTACT_EMAIL = "hola@tengounviaje.com";

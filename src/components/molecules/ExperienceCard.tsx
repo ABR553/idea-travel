@@ -11,11 +11,13 @@ interface ExperienceCardProps {
   experience: Experience;
 }
 
+const defaultProviderConfig = {
+  label: "GetYourGuide",
+  gradient: "from-[#FF5533] to-[#E6442B]",
+};
+
 const providerConfig: Record<string, { label: string; gradient: string }> = {
-  getyourguide: {
-    label: "GetYourGuide",
-    gradient: "from-[#FF5533] to-[#E6442B]",
-  },
+  getyourguide: defaultProviderConfig,
   civitatis: {
     label: "Civitatis",
     gradient: "from-[#00A5E0] to-[#0088BD]",
@@ -43,7 +45,7 @@ function MapPinIcon({ className }: { className?: string }) {
 export function ExperienceCard({ experience }: ExperienceCardProps) {
   const t = useTranslations("packDetail");
   const isTrending = (experience.clicksLast24h ?? 0) >= 5;
-  const config = providerConfig[experience.provider] ?? providerConfig.getyourguide;
+  const config = providerConfig[experience.provider] ?? defaultProviderConfig;
   const ProviderIcon = experience.provider === "civitatis" ? MapPinIcon : CompassIcon;
 
   return (

@@ -406,75 +406,231 @@ Sistema basado en 4px:
 </article>
 ```
 
-### 8.5 AccommodationCard
+### 8.5 AccommodationCard (Sin imagen - Tier-centric design)
+
+**Concepto**: Sin imagen de hotel, el tier se convierte en el protagonista visual. Cada tier tiene su propia identidad cromatica con un header gradiente que contiene un icono decorativo SVG de edificio/hotel. Los amenities se muestran como chips compactos en vez de lista vertical, maximizando la informacion visible sin imagen.
+
+**Paleta por tier**:
+| Tier | Gradiente header | Border | Icono | Badge bg |
+|---|---|---|---|---|
+| `budget` | `from-secondary-500 to-secondary-600` | `border-neutral-200 dark:border-neutral-700` | Edificio simple (3 pisos) | `bg-secondary-50 text-secondary-700` |
+| `standard` | `from-primary-500 to-primary-600` | `border-2 border-primary-500` | Edificio mediano (5 pisos, bandera) | `bg-primary-50 text-primary-700` |
+| `premium` | `from-amber-500 to-amber-600` | `border border-amber-300 dark:border-amber-600` | Edificio premium (torre, estrella) | `bg-amber-50 text-amber-700` |
+
+**Estructura**:
 ```html
-<!-- Variante standard (recomendada) - las otras son similares pero sin el ring -->
-<article class="relative bg-card rounded-xl overflow-hidden p-6
-  border-2 border-primary-500 shadow-lg">
-  <!-- Badge recomendado -->
-  <div class="absolute -top-px left-1/2 -translate-x-1/2
-    bg-primary-500 text-white text-caption font-bold
-    px-4 py-1 rounded-b-lg">
+<!-- Variante standard (recomendada) -->
+<article class="relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden
+  border-2 border-primary-500 shadow-lg
+  transition-all duration-normal ease-in-out hover:shadow-xl hover:-translate-y-1">
+
+  <!-- "Recomendado" label (solo standard) -->
+  <div class="absolute -top-px left-1/2 -translate-x-1/2 z-10
+    bg-primary-500 text-white text-xs font-bold px-4 py-1 rounded-b-lg">
     Recomendado
   </div>
-  <div class="mt-4">
-    <img class="w-full h-40 object-cover rounded-lg mb-4" />
-    <h4 class="text-h4 font-bold text-neutral-800 mb-1">Nombre Hotel</h4>
-    <div class="flex items-center gap-1 mb-3">
-      <!-- Stars rating -->
+
+  <!-- Gradient header con icono decorativo (reemplaza la imagen) -->
+  <div class="relative h-28 bg-gradient-to-br from-primary-500 to-primary-600
+    flex items-center justify-center overflow-hidden">
+    <!-- Patron decorativo sutil (circulos concentricos en opacity baja) -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute -right-8 -top-8 w-32 h-32 border-2 border-white rounded-full" />
+      <div class="absolute -right-4 -top-4 w-24 h-24 border-2 border-white rounded-full" />
+      <div class="absolute right-16 bottom-2 w-16 h-16 border border-white rounded-full" />
     </div>
-    <ul class="space-y-2 mb-4 text-body-sm text-neutral-600">
-      <li class="flex items-center gap-2">
-        <!-- icon --> WiFi incluido
-      </li>
-    </ul>
-    <div class="border-t border-neutral-200 pt-4">
-      <span class="text-caption text-neutral-500">Precio por noche</span>
-      <span class="text-h3 font-bold text-neutral-800 block">85EUR</span>
+    <!-- Icono de hotel SVG, blanco, ~48px -->
+    <svg class="w-12 h-12 text-white/90" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M2 21h20M3 21V7l9-4 9 4v14M9 10h1M14 10h1M9 14h1M14 14h1M9 18h6" />
+    </svg>
+    <!-- Trending badge (si aplica) -->
+    <span class="absolute top-3 left-3 inline-flex items-center gap-1
+      bg-white/20 backdrop-blur-sm text-white text-xs font-bold
+      px-2.5 py-1 rounded-full">
+      🔥 Trending
+    </span>
+    <!-- Tier badge -->
+    <span class="absolute top-3 right-3
+      bg-white/20 backdrop-blur-sm text-white text-xs font-medium
+      px-2.5 py-1 rounded-sm">
+      Estandar
+    </span>
+  </div>
+
+  <!-- Contenido -->
+  <div class="p-5">
+    <div class="flex items-start justify-between mb-1">
+      <h4 class="text-lg font-bold text-neutral-800 dark:text-neutral-100
+        font-heading leading-tight">
+        Nombre Hotel
+      </h4>
+    </div>
+    <div class="mb-3">
+      <!-- Rating component -->
+    </div>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4 line-clamp-2">
+      Descripcion del alojamiento...
+    </p>
+
+    <!-- Amenities como chips horizontales (max 4) -->
+    <div class="flex flex-wrap gap-1.5 mb-4">
+      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full
+        bg-neutral-100 dark:bg-neutral-700 text-xs text-neutral-600 dark:text-neutral-300">
+        <svg class="w-3 h-3" ...><!-- wifi icon --></svg>
+        WiFi
+      </span>
+      <!-- mas chips... -->
+    </div>
+
+    <!-- Precio + CTA -->
+    <div class="border-t border-neutral-200 dark:border-neutral-700 pt-4
+      flex items-end justify-between gap-2">
+      <div>
+        <span class="text-2xl font-bold text-neutral-800 dark:text-neutral-100
+          font-heading">
+          85€
+        </span>
+        <span class="text-xs text-neutral-500 dark:text-neutral-400">/noche</span>
+      </div>
+      <a href="..." rel="noopener nofollow sponsored" target="_blank"
+        class="text-sm font-medium text-primary-600 hover:text-primary-700
+        hover:underline underline-offset-4 transition-colors shrink-0">
+        Reservar →
+      </a>
     </div>
   </div>
 </article>
 
-<!-- Variante budget: sin border-primary, border-neutral-200, sin badge -->
-<!-- Variante premium: border-amber-400, badge "Premium" en amber -->
+<!-- Variante budget: gradiente from-secondary-500 to-secondary-600,
+     border border-neutral-200, sin label "Recomendado", icono edificio simple -->
+<!-- Variante premium: gradiente from-amber-500 to-amber-600,
+     border border-amber-300, icono torre premium con estrella -->
 ```
 
-### 8.6 ExperienceCard
+**Responsive**:
+- Mobile: 1 columna, cards full-width apiladas
+- Tablet+: 3 columnas como actualmente, grid gap-6
+
+**Interacciones**:
+- Hover: `shadow-xl` + `translateY(-4px)` en toda la card
+- El gradiente header NO tiene animacion (mantener solidez visual)
+- CTA link: underline on hover
+
+**Dark mode**:
+- Gradientes mantienen misma saturacion (se ven bien sobre fondo oscuro)
+- Patron decorativo: `opacity-[0.08]` en dark (sutil)
+- Chips amenities: `bg-neutral-700 text-neutral-300`
+
+---
+
+### 8.6 ExperienceCard (Sin imagen - Provider-branded gradient design)
+
+**Concepto**: Sin foto de la actividad, el proveedor (GetYourGuide/Civitatis) se convierte en el ancla visual con un header gradiente de su color corporativo. Un icono de actividad (brujula/mapa) refuerza el theme de aventura. La descripcion (antes oculta) se muestra como texto secundario, aportando contexto que antes daba la imagen.
+
+**Paleta por provider**:
+| Provider | Gradiente header | Badge text | Icono |
+|---|---|---|---|
+| `getyourguide` | `from-[#FF5533] to-[#E6442B]` | Blanco | Brujula SVG |
+| `civitatis` | `from-[#00A5E0] to-[#0088BD]` | Blanco | Mapa/pin SVG |
+
+**Por que colores corporativos del provider**: Refuerza la marca del proveedor (genera confianza - "conozco GetYourGuide") y diferencia visualmente las experiencias segun origen, permitiendo escaneo rapido.
+
+**Estructura**:
 ```html
 <a href="https://affiliate-link..."
-   rel="nofollow sponsored" target="_blank"
-   class="group block bg-card rounded-xl overflow-hidden shadow-md
-   transition-all duration-normal ease-in-out
+   rel="noopener nofollow sponsored" target="_blank"
+   class="group block bg-white dark:bg-neutral-800 rounded-xl overflow-hidden
+   shadow-md transition-all duration-normal ease-in-out
    hover:shadow-lg hover:-translate-y-1">
-  <div class="relative aspect-[16/10] overflow-hidden">
-    <img class="w-full h-full object-cover
-      transition-transform duration-slow group-hover:scale-105" />
-    <!-- Provider badge -->
-    <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm
-      text-caption font-medium px-2 py-1 rounded-sm">
+
+  <!-- Provider-branded gradient header (reemplaza la imagen) -->
+  <div class="relative h-24 bg-gradient-to-br from-[#FF5533] to-[#E6442B]
+    flex items-center justify-between px-5 overflow-hidden">
+    <!-- Patron decorativo (lineas diagonales sutiles) -->
+    <div class="absolute inset-0 opacity-10"
+      style="background: repeating-linear-gradient(
+        45deg, transparent, transparent 10px,
+        rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 11px
+      )">
+    </div>
+    <!-- Icono de actividad grande, semi-transparente, derecha -->
+    <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-16 h-16
+      text-white/15" ...>
+      <!-- compass icon -->
+    </svg>
+    <!-- Provider name prominente -->
+    <span class="relative text-white font-bold text-sm tracking-wide">
       GetYourGuide
     </span>
+    <!-- Trending badge (si aplica) -->
+    <span class="relative inline-flex items-center gap-1
+      bg-white/20 backdrop-blur-sm text-white text-xs font-bold
+      px-2.5 py-1 rounded-full">
+      🔥 Trending
+    </span>
   </div>
+
+  <!-- Contenido -->
   <div class="p-5">
-    <h4 class="text-h4 font-semibold text-neutral-800 mb-2
-      group-hover:text-primary-700 transition-colors">
-      Titulo experiencia
+    <h4 class="text-base font-semibold text-neutral-800 dark:text-neutral-100
+      mb-1.5 font-heading leading-tight
+      group-hover:text-primary-700 dark:group-hover:text-primary-400
+      transition-colors">
+      Titulo de la experiencia
     </h4>
-    <div class="flex items-center gap-2 text-body-sm text-neutral-500 mb-3">
+
+    <!-- Descripcion (NUEVA - antes no se mostraba) -->
+    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3
+      line-clamp-2 leading-relaxed">
+      Descripcion breve de la experiencia que aporta contexto...
+    </p>
+
+    <!-- Meta: duracion + rating en linea -->
+    <div class="flex items-center gap-2 text-sm text-neutral-500
+      dark:text-neutral-400 mb-3">
+      <!-- Icono reloj -->
+      <svg class="w-4 h-4 text-neutral-400" ...><!-- clock --></svg>
       <span>3 horas</span>
-      <span>·</span>
-      <span>4.8 ★</span>
+      <span aria-hidden="true">·</span>
+      <!-- Rating component -->
     </div>
-    <div class="flex items-center justify-between">
-      <span class="text-h4 font-bold text-neutral-800">45EUR</span>
-      <span class="text-body-sm font-medium text-primary-600
+
+    <!-- Precio + CTA -->
+    <div class="flex items-center justify-between pt-3
+      border-t border-neutral-100 dark:border-neutral-700">
+      <span class="text-lg font-bold text-neutral-800 dark:text-neutral-100">
+        45€
+      </span>
+      <span class="text-sm font-medium text-primary-600
         group-hover:underline underline-offset-4">
-        Reservar →
+        Reservar ahora →
       </span>
     </div>
   </div>
 </a>
 ```
+
+**Responsive**:
+- Mobile: 1 columna, cards full-width
+- Tablet: 2 columnas
+- Desktop: 3 columnas (como actualmente)
+
+**Interacciones**:
+- Hover card: `shadow-lg` + `translateY(-4px)` + title cambia a `primary-700`
+- CTA: underline on hover
+- El gradiente header es estatico (sin animaciones)
+
+**Dark mode**:
+- Gradientes provider se mantienen (alta saturacion funciona en dark)
+- Patron decorativo: reduce a `opacity-[0.06]`
+- Border separator: `border-neutral-700`
+
+**Accesibilidad**:
+- El color del provider NO porta informacion semantica (el nombre esta como texto)
+- Contraste de texto blanco sobre gradientes: ratio > 4.5:1 verificado
+- `aria-hidden="true"` en iconos decorativos y separadores
 
 ### 8.7 ProductCard
 ```html

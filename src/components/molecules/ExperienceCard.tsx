@@ -107,6 +107,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
         </div>
         <div className="flex items-center justify-between pt-3 border-t border-neutral-100 dark:border-neutral-700">
           <span className="text-lg font-bold text-neutral-800 dark:text-neutral-100">
+            <span className="text-xs font-normal text-neutral-500 dark:text-neutral-400">{t("fromPrice")} </span>
             {formatPrice(experience.price, experience.currency)}
           </span>
           <span className="text-sm font-medium text-primary-600 group-hover:underline underline-offset-4">

@@ -80,7 +80,8 @@
     "affiliateInfo": "Informacion sobre enlaces de afiliados",
     "perNight": "/noche",
     "bookNow": "Reservar",
-    "trending": "Popular ahora"
+    "trending": "Popular ahora",
+    "fromPrice": "Desde"
   },
   "shop": {
     "title": "Tienda de Viaje",

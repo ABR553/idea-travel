@@ -140,6 +140,7 @@ export function AccommodationCard({ accommodation }: AccommodationCardProps) {
         {/* Precio + CTA */}
         <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4 flex items-end justify-between gap-2">
           <div>
+            <span className="text-xs text-neutral-500 dark:text-neutral-400">{tDetail("fromPrice")} </span>
             <span className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 font-[family-name:var(--font-heading)]">
               {formatPrice(accommodation.pricePerNight, accommodation.currency)}
             </span>

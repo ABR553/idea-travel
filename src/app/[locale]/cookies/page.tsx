@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: CookiesPageProps): Promise<Me
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: {
+      canonical: `/${locale}/cookies`,
+      languages: {
+        es: "/es/cookies",
+        en: "/en/cookies",
+        "x-default": "/es/cookies",
+      },
+    },
   };
 }
 

@@ -9,6 +9,7 @@ export interface BlogPostListItem {
   category: string;
   publishedAt: string | null;
   relatedPackSlug: string | null;
+  availableLocales: string[];
 }
 
 export interface BlogPost extends BlogPostListItem {

@@ -21,7 +21,9 @@ export async function generateStaticParams() {
   try {
     const { data: packs } = await packRepository.getAllPacks();
     return routing.locales.flatMap((locale) =>
-      packs.map((pack) => ({ locale, slug: pack.slug }))
+      packs
+        .filter((pack) => pack.availableLocales.includes(locale))
+        .map((pack) => ({ locale, slug: pack.slug }))
     );
   } catch {
     return [];
@@ -32,7 +34,16 @@ export async function generateMetadata({ params }: PackPageProps): Promise<Metad
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "packDetail" });
   const pack = await packRepository.getPackBySlug(slug, locale);
-  if (!pack) return { title: t("notFound") };
+  if (!pack || !pack.availableLocales.includes(locale)) {
+    return { title: t("notFound"), robots: { index: false, follow: false } };
+  }
+
+  const languages = Object.fromEntries(
+    pack.availableLocales.map((l) => [l, `/${l}/packs/${slug}`])
+  );
+  const xDefault = pack.availableLocales.includes("es")
+    ? `/es/packs/${slug}`
+    : `/${pack.availableLocales[0]}/packs/${slug}`;
 
   return {
     title: pack.title,
@@ -45,11 +56,7 @@ export async function generateMetadata({ params }: PackPageProps): Promise<Metad
     },
     alternates: {
       canonical: `/${locale}/packs/${slug}`,
-      languages: {
-        es: `/es/packs/${slug}`,
-        en: `/en/packs/${slug}`,
-        "x-default": `/es/packs/${slug}`,
-      },
+      languages: { ...languages, "x-default": xDefault },
     },
   };
 }
@@ -63,7 +70,7 @@ export default async function PackDetailPage({ params }: PackPageProps) {
   const tCommon = await getTranslations("common");
 
   const pack = await packRepository.getPackBySlug(slug, locale);
-  if (!pack) notFound();
+  if (!pack || !pack.availableLocales.includes(locale)) notFound();
 
   const jsonLd = generateTouristTripJsonLd(pack);
 

@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: TermsPageProps): Promise<Meta
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "es" ? "/es/terminos" : "/en/terms",
+      languages: {
+        es: "/es/terminos",
+        en: "/en/terms",
+        "x-default": "/es/terminos",
+      },
+    },
   };
 }
 

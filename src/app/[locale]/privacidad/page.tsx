@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "es" ? "/es/privacidad" : "/en/privacy",
+      languages: {
+        es: "/es/privacidad",
+        en: "/en/privacy",
+        "x-default": "/es/privacidad",
+      },
+    },
   };
 }
 

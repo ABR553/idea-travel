@@ -92,6 +92,7 @@ export interface ApiPackListResponse {
   duration_days: number;
   price: ApiPriceRange;
   featured: boolean;
+  available_locales?: string[];
 }
 
 export interface ApiPackResponse {
@@ -107,6 +108,7 @@ export interface ApiPackResponse {
   duration_days: number;
   price: ApiPriceRange;
   featured: boolean;
+  available_locales?: string[];
 }
 
 export interface ApiProductResponse {
@@ -247,6 +249,7 @@ export function mapPackListItem(api: ApiPackListResponse): PackListItem {
     durationDays: api.duration_days,
     price: mapPriceRange(api.price),
     featured: api.featured,
+    availableLocales: api.available_locales ?? [],
   };
 }
 
@@ -264,6 +267,7 @@ export function mapPackDetail(api: ApiPackResponse): PackDetail {
     durationDays: api.duration_days,
     price: mapPriceRange(api.price),
     featured: api.featured,
+    availableLocales: api.available_locales ?? [],
   };
 }
 

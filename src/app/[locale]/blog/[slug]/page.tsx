@@ -18,9 +18,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const { locale, slug } = await params;
   const post = await blogRepository.getPostBySlug(slug, locale).catch(() => null);
 
-  if (!post) {
-    return { title: "Not Found" };
+  if (!post || !post.availableLocales.includes(locale)) {
+    return { title: "Not Found", robots: { index: false, follow: false } };
   }
+
+  const languages = Object.fromEntries(
+    post.availableLocales.map((l) => [l, `/${l}/blog/${slug}`])
+  );
+  const xDefault = post.availableLocales.includes("es")
+    ? `/es/blog/${slug}`
+    : `/${post.availableLocales[0]}/blog/${slug}`;
 
   return {
     title: post.title,
@@ -40,11 +47,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     },
     alternates: {
       canonical: `/${locale}/blog/${slug}`,
-      languages: {
-        es: `/es/blog/${slug}`,
-        en: `/en/blog/${slug}`,
-        "x-default": `/es/blog/${slug}`,
-      },
+      languages: { ...languages, "x-default": xDefault },
     },
   };
 }
@@ -55,12 +58,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const t = await getTranslations({ locale, namespace: "blog" });
 
   const post = await blogRepository.getPostBySlug(slug, locale).catch(() => null);
-  if (!post) notFound();
+  if (!post || !post.availableLocales.includes(locale)) notFound();
 
   const jsonLd = generateBlogPostJsonLd(post, locale);
   const breadcrumbs = [
-    { name: t("title"), url: "/blog" },
-    { name: post.title, url: `/blog/${slug}` },
+    { name: t("title"), url: `/${locale}/blog` },
+    { name: post.title, url: `/${locale}/blog/${slug}` },
   ];
 
   return (

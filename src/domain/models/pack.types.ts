@@ -74,6 +74,7 @@ export interface PackListItem {
   durationDays: number;
   price: PriceRange;
   featured: boolean;
+  availableLocales: string[];
 }
 
 export type PackSortBy = "price_asc" | "price_desc" | "duration_asc" | "duration_desc";
@@ -103,4 +104,5 @@ export interface PackDetail {
   durationDays: number;
   price: PriceRange;
   featured: boolean;
+  availableLocales: string[];
 }

@@ -97,10 +97,10 @@ export function ProductCard({ product }: ProductCardProps) {
             {formatPriceDecimal(product.price, product.currency)}
           </span>
           <a
-            href={product.link ?? product.affiliateUrl}
+            href={product.affiliateUrl}
             rel="noopener nofollow sponsored"
             target="_blank"
-            onClick={() => trackAffiliateClick({ provider: "amazon", item_name: product.name, url: product.link ?? product.affiliateUrl })}
+            onClick={() => trackAffiliateClick({ provider: "amazon", item_name: product.name, url: product.affiliateUrl })}
             className="inline-flex items-center gap-1 px-4 py-2 rounded-[var(--radius-lg)] bg-[#FF9900] text-white text-sm font-semibold transition-all duration-[var(--duration-fast)] hover:bg-[#E88B00] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#FF9900] focus-visible:ring-offset-2"
           >
             {t("viewOnAmazon")}

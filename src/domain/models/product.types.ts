@@ -31,5 +31,4 @@ export interface Product {
   rating: number;
   externalId?: string | null;
   projectId?: string | null;
-  link?: string | null;
 }

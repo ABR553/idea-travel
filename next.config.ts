@@ -18,6 +18,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    // Non-HTML assets that Google crawls (because they're referenced from <head>)
+    // but should not appear in search results. Keeps them reachable for PWA /
+    // social previews while removing them from GSC's "Crawled — not indexed".
+    const noindex = { key: "X-Robots-Tag", value: "noindex" };
+    return [
+      { source: "/manifest.json", headers: [noindex] },
+      { source: "/opengraph-image", headers: [noindex] },
+      { source: "/icon.png", headers: [noindex] },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

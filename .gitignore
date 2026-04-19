@@ -57,6 +57,7 @@ Thumbs.db
 
 # Claude
 .claude/
+.worktrees/
 
 # Docker
 docker-compose.override.yml

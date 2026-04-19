@@ -125,7 +125,6 @@ export interface ApiProductResponse {
   rating: number;
   external_id?: string | null;
   project_id?: string | null;
-  link?: string | null;
 }
 
 export interface ApiProjectResponse {
@@ -286,7 +285,6 @@ export function mapProduct(api: ApiProductResponse): Product {
     rating: api.rating,
     externalId: api.external_id ?? null,
     projectId: api.project_id ?? null,
-    link: api.link ?? null,
   };
 }
 

@@ -13,7 +13,10 @@ interface BreadcrumbsProps {
 
 export async function Breadcrumbs({ items }: BreadcrumbsProps) {
   const locale = await getLocale();
-  const jsonLd = generateBreadcrumbJsonLd(items);
+  const localize = (url: string) => (url === "/" ? `/${locale}` : `/${locale}${url}`);
+  const jsonLd = generateBreadcrumbJsonLd(
+    items.map((item) => ({ ...item, url: localize(item.url) }))
+  );
 
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
@@ -24,7 +27,7 @@ export async function Breadcrumbs({ items }: BreadcrumbsProps) {
       <ol className="flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
-          const localizedUrl = item.url === "/" ? `/${locale}` : `/${locale}${item.url}`;
+          const localizedUrl = localize(item.url);
           return (
             <li key={item.url} className="flex items-center gap-2">
               {index > 0 && <span aria-hidden="true">/</span>}

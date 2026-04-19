@@ -21,12 +21,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // API unavailable during build
   }
 
-  let blogPosts: Awaited<ReturnType<typeof blogRepository.getPosts>>["data"] = [];
-  try {
-    const result = await blogRepository.getPosts("es", 1, 100);
-    blogPosts = result.data;
-  } catch {
-    // API unavailable during build
+  // Fetch the blog list in every locale. A post is considered available in locale X
+  // if the /blog listing in X returns it. This is resilient to the backend list
+  // endpoint omitting per-post available_locales (in which case the mapper yields []).
+  const blogIndex = new Map<string, {
+    slug: string;
+    publishedAt: string | null;
+    locales: Set<Locale>;
+  }>();
+  for (const locale of routing.locales) {
+    try {
+      const result = await blogRepository.getPosts(locale, 1, 100);
+      for (const post of result.data) {
+        const existing = blogIndex.get(post.slug);
+        if (existing) {
+          existing.locales.add(locale);
+        } else {
+          blogIndex.set(post.slug, {
+            slug: post.slug,
+            publishedAt: post.publishedAt,
+            locales: new Set([locale]),
+          });
+        }
+      }
+    } catch {
+      // API unavailable during build for this locale
+    }
   }
 
   const locales = routing.locales;
@@ -89,10 +109,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  for (const post of blogPosts) {
-    const available = post.availableLocales.length > 0
-      ? locales.filter((l) => post.availableLocales.includes(l))
-      : [];
+  for (const post of blogIndex.values()) {
+    const available = [...post.locales];
     if (available.length === 0) continue;
 
     const lastModified = post.publishedAt ? new Date(post.publishedAt) : new Date();
